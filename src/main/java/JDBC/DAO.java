@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,6 +28,29 @@ public class DAO {
 	public DAO(DataSource dataSource) {
 		this.myDataSource = dataSource;
 	}
+        
+        
+        
+        public HashMap connectionClient() throws DAOException{
+            HashMap login = new HashMap();
+            String sql = "SELECT EMAIL,CUSTOMER_ID FROM CUSTOMER";
+            try (   Connection connection = myDataSource.getConnection(); // Ouvrir une connexion
+			Statement stmt = connection.createStatement(); // On crée un statement pour exécuter une requête
+			ResultSet rs = stmt.executeQuery(sql) // Un ResultSet pour parcourir les enregistrements du résultat
+		){
+				if (rs.next()) { // On a trouvé
+					String email = rs.getString("EMAIL");
+					String id = rs.getString("CUSTOMER_ID");
+					// On crée l'objet "entity"
+					login.put(email, id);
+                                        
+				} // else on n'a pas trouvé, on renverra null
+            } catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new DAOException(ex.getMessage());
+		}
+            return login;
+        }
 
 	/**
 	 *
