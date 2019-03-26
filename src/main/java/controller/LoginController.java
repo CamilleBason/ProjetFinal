@@ -1,4 +1,4 @@
-package Session;
+package controller;
 
 import JDBC.DAO;
 import JDBC.DAOException;
@@ -118,6 +118,7 @@ public class LoginController extends HttpServlet {
             // On stocke l'information dans la session
             HttpSession session = request.getSession(true); // démarre la session
             session.setAttribute("userName", resultat.get(loginParam));
+            System.out.println("oui !");
         } else { // On positionne un message d'erreur pour l'afficher dans la JSP
             request.setAttribute("errorMessage", "Login/Password incorrect");
         }
