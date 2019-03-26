@@ -31,9 +31,10 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException, DAOException {
         // Quelle action a appelé cette servlet ?
         String action = request.getParameter("action");
+        System.out.println("Connexion :" + action);
         if (null != action) {
             switch (action) {
-                case "login":
+                case "Connexion":
                     checkLogin(request);
                     break;
 
@@ -51,7 +52,6 @@ public class LoginController extends HttpServlet {
         if (null == userName) { // L'utilisateur n'est pas connecté
             // On choisit la page de login
             jspView = "login.jsp";
-            
 
         } else { // L'utilisateur est connecté
             // On choisit la page d'affichage
@@ -113,37 +113,50 @@ public class LoginController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void checkLogin(HttpServletRequest request) throws DAOException  {
+    private void checkLogin(HttpServletRequest request) throws DAOException {
         // Les paramètres transmis dans la requête
         String loginParam = request.getParameter("loginParam");
         String passwordParam = request.getParameter("passwordParam");
+
+        if (loginParam.equals("") || passwordParam.equals("")) {
+            request.setAttribute("errorMessage", "Login/Password invalide");
+            return;
+        }
 
         // Le login/password défini dans web.xml
         String loginAdmin = getInitParameter("login");
         String passwordAdmin = getInitParameter("password");
         String userName = getInitParameter("userName");
 
-        // création du DAO
-        DAO dao = new DAO(DataSourceFactory.getDataSource());
-        int customerID = Integer.valueOf(passwordParam);
-        CustomerEntity customer = dao.findCustomer(customerID);
-
         if (loginAdmin.equals(loginParam) && passwordAdmin.equals(passwordParam)) {
             // On a trouvé la combinaison login / password
             // On stocke l'information dans la session
             HttpSession session = request.getSession(true); // démarre la session
             session.setAttribute("userName", userName);
-            
+
             //je compare le "customerID" rentré par l'utlisateur avec les "CustomerID" renvoyés par la requete du DAO
-        } else if (customer != null && customer.getEmail().equals(loginParam) && customerID == customer.getCustomerId()) {
-            // On a trouvé la combinaison login / password
-            // On stocke l'information dans la session
-            HttpSession session = request.getSession(true); // démarre la session
-            session.setAttribute("userName", customer.getName());
-            session.setAttribute("userID", customer.getCustomerId());
-            
-        } else { // On positionne un message d'erreur pour l'afficher dans la JSP
-            request.setAttribute("errorMessage", "Login/Password incorrect");
+        } else {
+
+            // création du DAO
+            DAO dao = new DAO(DataSourceFactory.getDataSource());
+            try {
+                int customerID = Integer.valueOf(passwordParam);
+                CustomerEntity customer = dao.findCustomer(customerID);
+
+                if (customer != null && customer.getEmail().equals(loginParam) && customerID == customer.getCustomerId()) {
+                    // On a trouvé la combinaison login / password
+                    // On stocke l'information dans la session
+                    HttpSession session = request.getSession(true); // démarre la session
+                    session.setAttribute("userName", customer.getName());
+                    session.setAttribute("userID", customer.getCustomerId());
+
+                } else { // On positionne un message d'erreur pour l'afficher dans la JSP
+                    request.setAttribute("errorMessage", "Login/Password incorrect");
+                }
+            } catch (NumberFormatException e) {
+                request.setAttribute("errorMessage", "Login/Password incorrect");
+            }
+
         }
 
     }

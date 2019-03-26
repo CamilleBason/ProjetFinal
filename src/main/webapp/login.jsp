@@ -20,9 +20,9 @@
                 <div id="error" style="color:red">${errorMessage}</div>
 
 		<form action="<c:url value="/" />" method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
-			login : <input name='loginParam'><br>
+			login : <input name='loginParam' type ='text'><br>
 			password : <input name='passwordParam' type='password'><br>
-			<input type='submit' name='action' value='Valider'>
+			<input type='submit' name='action' value='Connexion'>
 		</form>
 	</body>
 </html>
