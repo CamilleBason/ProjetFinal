@@ -1,5 +1,6 @@
 package controller;
 
+import JDBC.CustomerEntity;
 import JDBC.DAO;
 import JDBC.DAOException;
 import JDBC.DataSourceFactory;
@@ -27,25 +28,20 @@ public class LoginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, DAOException {
         // Quelle action a appelé cette servlet ?
         String action = request.getParameter("action");
         if (null != action) {
-                switch (action) {
-                    case "login":
-                {
-                    try {
-                        checkLogin(request);
-                    } catch (DAOException ex) {
-                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                        break;
-                    case "logout":
-                        doLogout(request);
-                        break;
-                }
-          
+            switch (action) {
+                case "login":
+                    checkLogin(request);
+                    break;
+
+                case "logout":
+                    doLogout(request);
+                    break;
+            }
+
         }
 
         // Est-ce que l'utilisateur est connecté ?
@@ -58,7 +54,11 @@ public class LoginController extends HttpServlet {
 
         } else { // L'utilisateur est connecté
             // On choisit la page d'affichage
-            jspView = "affiche.jsp";
+            if ("Administrateur".equals(userName)) {
+                jspView = "admin.jsp";
+            } else {
+                jspView = "affiche.jsp";
+            }
         }
         // On va vers la page choisie
         request.getRequestDispatcher(jspView).forward(request, response);
@@ -77,7 +77,11 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DAOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -91,7 +95,11 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DAOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -104,24 +112,38 @@ public class LoginController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void checkLogin(HttpServletRequest request) throws DAOException {
+    private void checkLogin(HttpServletRequest request) throws DAOException  {
         // Les paramètres transmis dans la requête
         String loginParam = request.getParameter("loginParam");
         String passwordParam = request.getParameter("passwordParam");
 
         // Le login/password défini dans web.xml
-        DAO dao = new DAO(DataSourceFactory.getDataSource());
-        HashMap resultat = dao.connectionClient();
+        String loginAdmin = getInitParameter("login");
+        String passwordAdmin = getInitParameter("password");
 
-        if (resultat.containsKey(loginParam) && passwordParam == resultat.get(loginParam)) {
+        // création du DAO
+        DAO dao = new DAO(DataSourceFactory.getDataSource());
+        int customerID = Integer.valueOf(passwordParam);
+        CustomerEntity customer = dao.findCustomer(customerID);
+
+        if ((loginAdmin.equals(loginParam) && (passwordAdmin.equals(passwordParam)))) {
             // On a trouvé la combinaison login / password
             // On stocke l'information dans la session
             HttpSession session = request.getSession(true); // démarre la session
-            session.setAttribute("userName", resultat.get(loginParam));
+            session.setAttribute("userName", getInitParameter("userName"));
+
+            //je compare le "customerID" rentré par l'utlisateur avec les "CustomerID" renvoyés par la requete du DAO
+        } else if (customer != null && customer.getEmail().equals(passwordParam) && customerID == customer.getCustomerId()) {
+            // On a trouvé la combinaison login / password
+            // On stocke l'information dans la session
+            HttpSession session = request.getSession(true); // démarre la session
+            session.setAttribute("userName", customer.getName());
+            session.setAttribute("userID", customer.getCustomerId());
             System.out.println("oui !");
         } else { // On positionne un message d'erreur pour l'afficher dans la JSP
             request.setAttribute("errorMessage", "Login/Password incorrect");
         }
+
     }
 
     private void doLogout(HttpServletRequest request) {

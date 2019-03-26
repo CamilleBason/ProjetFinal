@@ -150,8 +150,9 @@ public class DAO {
 				if (rs.next()) { // On a trouvé
 					String name = rs.getString("NAME");
 					String address = rs.getString("ADDRESSLINE1");
+                                        String email = rs.getString("EMAIL");
 					// On crée l'objet "entity"
-					result = new CustomerEntity(customerID, name, address);
+					result = new CustomerEntity(customerID, name, address, email);
 				} // else on n'a pas trouvé, on renverra null
 			}
 		}  catch (SQLException ex) {
@@ -184,8 +185,9 @@ public class DAO {
 					int id = rs.getInt("CUSTOMER_ID");
 					String name = rs.getString("NAME");
 					String address = rs.getString("ADDRESSLINE1");
+                                        String email = rs.getString("EMAIL");
 					// On crée l'objet entité
-					CustomerEntity c = new CustomerEntity(id, name, address);
+					CustomerEntity c = new CustomerEntity(id, name, address, email);
 					// On l'ajoute à la liste des résultats
 					result.add(c);
 				}
