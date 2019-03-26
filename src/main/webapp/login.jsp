@@ -16,7 +16,8 @@
 		La servlet fait : request.setAttribute("errorMessage", "Login/Password incorrect");
 		La JSP récupère cette valeur dans ${errorMessage}
 		--%>
-		<div style="color:red">${errorMessage}</div>
+		
+                <div id="error" style="color:red">${errorMessage}</div>
 
 		<form action="<c:url value="/" />" method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
 			login : <input name='loginParam'><br>

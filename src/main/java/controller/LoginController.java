@@ -51,6 +51,7 @@ public class LoginController extends HttpServlet {
         if (null == userName) { // L'utilisateur n'est pas connecté
             // On choisit la page de login
             jspView = "login.jsp";
+            
 
         } else { // L'utilisateur est connecté
             // On choisit la page d'affichage
@@ -120,26 +121,27 @@ public class LoginController extends HttpServlet {
         // Le login/password défini dans web.xml
         String loginAdmin = getInitParameter("login");
         String passwordAdmin = getInitParameter("password");
+        String userName = getInitParameter("userName");
 
         // création du DAO
         DAO dao = new DAO(DataSourceFactory.getDataSource());
         int customerID = Integer.valueOf(passwordParam);
         CustomerEntity customer = dao.findCustomer(customerID);
 
-        if ((loginAdmin.equals(loginParam) && (passwordAdmin.equals(passwordParam)))) {
+        if (loginAdmin.equals(loginParam) && passwordAdmin.equals(passwordParam)) {
             // On a trouvé la combinaison login / password
             // On stocke l'information dans la session
             HttpSession session = request.getSession(true); // démarre la session
-            session.setAttribute("userName", getInitParameter("userName"));
-
+            session.setAttribute("userName", userName);
+            
             //je compare le "customerID" rentré par l'utlisateur avec les "CustomerID" renvoyés par la requete du DAO
-        } else if (customer != null && customer.getEmail().equals(passwordParam) && customerID == customer.getCustomerId()) {
+        } else if (customer != null && customer.getEmail().equals(loginParam) && customerID == customer.getCustomerId()) {
             // On a trouvé la combinaison login / password
             // On stocke l'information dans la session
             HttpSession session = request.getSession(true); // démarre la session
             session.setAttribute("userName", customer.getName());
             session.setAttribute("userID", customer.getCustomerId());
-            System.out.println("oui !");
+            
         } else { // On positionne un message d'erreur pour l'afficher dans la JSP
             request.setAttribute("errorMessage", "Login/Password incorrect");
         }
