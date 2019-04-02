@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -200,6 +201,117 @@ public class DAO {
 		return result;
 
 	}
+        public List<PurchaseOrder> findPurchaseOrder(int customerID) throws DAOException, SQLException {
+		//PurchaseOrder result = null;
+                List<PurchaseOrder> result = new LinkedList<>();
+               
+		String sql;
+                sql = "SELECT * FROM PURCHASE_ORDER WHERE CUSTOMER_ID = ?";
+		try (Connection connection = myDataSource.getConnection(); // On crée un statement pour exécuter une requête
+			PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+			stmt.setInt(1, customerID);
+
+			try (ResultSet rs = stmt.executeQuery()) {
+				while (rs.next()) { // On a trouvé
+					int orderNum = rs.getInt("ORDER_NUM");
+                                        int customerId = rs.getInt("CUSTOMER_ID");
+                                        int productID = rs.getInt("PRODUCT_ID");
+                                        int quantity = rs.getInt("QUANTITY");
+                                        float shippingCost = rs.getFloat("SHIPPING_COST");
+                                        Date salesDate = rs.getDate("SALES_DATE");
+                                        Date shippingDate = rs.getDate("SHIPPING_DATE");
+                                        String freightCompany = rs.getString("FREIGHT_COMPANY");
+					// On crée l'objet "entity"
+					PurchaseOrder PO = new PurchaseOrder(orderNum, customerId, productID, quantity, shippingCost, salesDate, shippingDate, freightCompany);
+                                        
+                                        result.add(PO);
+                                        
+				} // else on n'a pas trouvé, on renverra null
+			}
+		}  catch (SQLException ex) {
+			Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+			throw new DAOException(ex.getMessage());
+		}
+		return result;
+        }
+        public List<PurchaseOrder> allCodes() throws SQLException {
+
+		List<PurchaseOrder> result = new LinkedList<>();
+
+		String sql = "SELECT * FROM PURCHASE_ORDER ORDER BY CUSTOMER_ID";
+		try (Connection connection = myDataSource.getConnection(); 
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+                                int orderNum = rs.getInt("ORDER_NUM");
+                                int customerId = rs.getInt("CUSTOMER_ID");
+                                int productID = rs.getInt("PRODUCT_ID");
+                                int quantity = rs.getInt("QUANTITY");
+                                float shippingCost = rs.getFloat("SHIPPING_COST");
+                                Date salesDate = rs.getDate("SALES_DATE");
+                                Date shippingDate = rs.getDate("SHIPPING_DATE");
+                                String freightCompany = rs.getString("FREIGHT_COMPANY");
+                                // On crée l'objet "purchaseOrder"
+                                PurchaseOrder PO = new PurchaseOrder(orderNum, customerId, productID, quantity, shippingCost, salesDate, shippingDate, freightCompany);
+                                result.add(PO);
+			}
+		}
+		return result;
+	}
+public int addDiscountCode(int numC, int IDclient, int prodid, int quantite, float fraisPort, Date dateVente, Date dateExp, String transport) throws SQLException {
+		int result = 0;
+
+		String sql = "INSERT INTO PURCHASE_ORDER VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		try (Connection connection = myDataSource.getConnection(); 
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+			stmt.setInt(1, numC);
+			stmt.setInt(2, IDclient);
+                        stmt.setInt(3, prodid);
+                        stmt.setInt(4, quantite);
+                        stmt.setFloat(5, fraisPort);
+                        stmt.setDate(6, (java.sql.Date) dateVente);
+                        stmt.setDate(7, (java.sql.Date) dateExp);
+                        stmt.setString(8, transport);
+			result = stmt.executeUpdate();
+		}
+		return result;
+	}
+
+		
+	/**
+	 * Supprime un enregistrement dans la table DISCOUNT_CODE
+	 * @param code la clé de l'enregistrement à supprimer
+	 * @return le nombre d'enregistrements supprimés (1 ou 0)
+	 * @throws java.sql.SQLException renvoyées par JDBC
+	 **/
+	public int deleteDiscountCode(int code) throws SQLException {
+		int result = 0;
+		String sql = "DELETE FROM PURCHASE_ORDER WHERE ORDER_NUM = ?";
+		try (Connection connection = myDataSource.getConnection(); 
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+			stmt.setInt(1, code);
+			result = stmt.executeUpdate();
+		}
+		return result;
+	}
+        
+        public int modifPurchaseOrder(int numC, int IDclient, int prodid, int quantite, float fraisPort, Date dateVente, Date dateExp, String transport) throws SQLException {
+            int result = 0;
+            String sql = "UPDATE PURCHASE_ORDER SET PRODUCT_ID=? , QUANTITY=?, SHIPPING_COST=?, SALES_DATE=?, SHIPPING_DATE=?, FREIGHT_COMPANY=? WHERE CUSTOMER_ID=" + IDclient +"AND ORDER_NUM=" + numC;
+            try (Connection connection = myDataSource.getConnection(); 
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+			
+                        stmt.setInt(1, prodid);
+                        stmt.setInt(2, quantite);
+                        stmt.setFloat(3, fraisPort);
+                        stmt.setDate(4, (java.sql.Date) dateVente);
+                        stmt.setDate(5, (java.sql.Date) dateExp);
+                        stmt.setString(6, transport);
+			result = stmt.executeUpdate();
+		}
+                return result;
+        }
 
 }
 
