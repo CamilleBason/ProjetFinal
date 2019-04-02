@@ -31,7 +31,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException, DAOException {
         // Quelle action a appelé cette servlet ?
         String action = request.getParameter("action");
-        System.out.println("Connexion :" + action);
+        
         if (null != action) {
             switch (action) {
                 case "Connexion":
