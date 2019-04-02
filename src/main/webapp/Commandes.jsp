@@ -10,12 +10,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="shortcut icon" type="image/x-icon" href="images/customer.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="image/commande.ico">
         <title>Commandes Client</title>
         <!-- On charge jQuery -->
+        
         <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <!-- On charge le moteur de template mustache https://mustache.github.io/ -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
+        
 
 
         <script>
@@ -227,6 +229,47 @@
 
 
         </script> 
+        <style>
+                  @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+table {
+                               font-family: "Roboto", helvetica, arial, sans-serif;
+                               font-size:11px;
+                               color:#333333;
+                               border-width: 20px;
+                               border-color: #666666;
+                               border-collapse: collapse;
+                       }
+                       table th {
+                               border-width: 1px;
+                               padding: 8px;
+                               border-style: solid;
+                               border-color: #666666;
+                               background-color: #3f819e;
+                       }
+                       table td {
+                               border-width: 1px;
+                               padding: 8px;
+                               border-style: solid;
+                               border-color: #666666;
+                               background-color:  #ffffff;
+			
+                       }
+                        
+h1 { color: #3f819e;
+font-family: "Roboto", helvetica, arial, sans-serif;}
+
+button {
+       border-radius:11px 11px 11px 11px;
+       background: #3f819e;
+       border:none;
+       color:#333333;
+       font:bold 12px Verdana;
+       padding:6px 0 6px 0;
+       box-shadow:1px 1px 3px #999;
+}
+h2 { color: #FF0000;
+font-family: "Roboto", helvetica, arial, sans-serif;}   
+        </style>
 
     </head>
     <body>
@@ -244,19 +287,22 @@
         <script id="codesTemplate" type="text/template">
             <TABLE id="tableau">
             <thead>
-            <tr><th>Numéro du bon de commande</th><th>Client ID</th><th>ID du Produit</th><th>Quantite</th><th>Frais de port</th><th>Date de vente</th><th>Date d'expédition</th><th>Société de transport</th><th>Action</th></tr>
+            <tr><th>Numéro du bon de commande</th><th>Client ID</th><th>ID du Produit</th><th>Quantite</th><th>Frais de port</th><th>Date de vente</th><th>Date d'expédition</th><th>Suppression</th><th>Modifier</th></tr>
             </thead>
             <!--                         test : {{customerId}}==${userID}>-->
             {{! Pour chaque enregistrement }}
             {{#records}}
             {{! Une ligne dans la table }}
             <tbody>
-            <TR><TD>{{orderNum}}</TD><TD>{{customerId}}</TD><TD>{{productID}}</TD><TD>{{quantity}}</TD><TD>{{shippingCost}}</TD><TD>{{salesDate}}</TD><TD>{{shippingDate}}</TD><TD>{{freightCompany}}</TD><TD><button class="supprimer" onclick="deleteCode('{{orderNum}}')">Supprimer</button></TD></TR>
+            <TR><TD>{{orderNum}}</TD><TD>{{customerId}}</TD><TD>{{productID}}</TD><TD>{{quantity}}</TD><TD>{{shippingCost}}</TD><TD>{{salesDate}}</TD><TD>{{shippingDate}}</TD><TD><button class="supprimer" onclick="deleteCode('{{orderNum}}')">Supprimer</button></TD><TD><button class="modifier" onclick="modify()">Modifier</button></TD></TR>
             </tbody>
             {{/records}}
 
             </TABLE>
-
+            <p>
+            
+           </p>
+        <button class="ajouter" onclick="window.location='AjoutCommande.jsp'">Ajouter une commande</button>
         </script>
 
         <script id="selectTemplate" type="text/template">
@@ -267,5 +313,6 @@
             <OPTION VALUE="{{.}}">{{.}}</OPTION>
             {{/records}}
         </script>
+            
     </body>
 </html>
