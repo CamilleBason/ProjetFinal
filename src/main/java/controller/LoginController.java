@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
         } else { // L'utilisateur est connecté
             // On choisit la page d'affichage
             if ("Administrateur".equals(userName)) {
-                jspView = "/View/PageAdministrateur.jsp";
+                jspView = "googlePieChart.jsp";
             } else {
                 jspView = "Commandes.jsp";
             }

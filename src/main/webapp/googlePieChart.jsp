@@ -51,8 +51,8 @@
 	</script>
 </head>
 <body>
-	<h1>Exemple d'utilisation des <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/piechart#3D" target="_blank">visualisations Google</a></h1>
-	<a href='salesByCustomer' target="_blank">Voir les données brutes</a><br>
+	<h1>Exemple d'utilisation des données google </h1>
+	
 	<!-- Le graphique apparaît ici -->
 	<div id="piechart" style="width: 900px; height: 500px;"></div>
 </body>
