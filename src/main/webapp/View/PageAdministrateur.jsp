@@ -6,50 +6,141 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
 <html>
-  <head>
-    <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <head>
+        <title>Edition des taux de remise (AJAX)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- On charge jQuery -->
+        <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <!-- On charge le moteur de template mustache https://mustache.github.io/ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-      // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+        <script>
+            google.charts.load('current', {'packages': ['corechart', 'bar']});
+            google.charts.setOnLoadCallback(drawChart);
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
+            $(document).ready(// Exécuté à la fin du chargement de la page
+                    function () {
+                        // On montre la liste des codes
+                        showCodes();
+                    }
+            );
 
-        // Set chart options
-        var options = {'title':"Chiffres d'affaire par catégorie d'article",
-                       'width':400,
-                       'height':300};
+            function showCodes() {
+                // On fait un appel AJAX pour chercher les codes
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-  </head>
+            }
 
-  <body>
-    <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
-  </body>
+            // Ajouter un code
+            function addCode() {
+                $.ajax({
+                    url: "addCode",
+                    // serialize() renvoie tous les paramètres saisis dans le formulaire
+                    data: $("#codeForm").serialize(),
+                    dataType: "json",
+                    success: // La fonction qui traite les résultats
+                            function (result) {
+                                showCodes();
+                                console.log(result);
+                            },
+                    error: showError
+                });
+                return false;
+            }
+
+            // Supprimer un code
+            function deleteCode(code) {
+                $.ajax({
+                    url: "deleteCode",
+                    data: {"code": code},
+                    dataType: "json",
+                    success:
+                            function (result) {
+                                showCodes();
+                                console.log(result);
+                            },
+                    error: showError
+                });
+                return false;
+            }
+
+            // Fonction qui traite les erreurs de la requête
+            function showError(xhr, status, message) {
+                alert(JSON.parse(xhr.responseText).message);
+            }
+
+
+
+            function drawChart(result) {
+                $.ajax({
+                    url: "http://localhost:8080/ProjetFinal/allDiscountCodes",
+                    dataType: "json",
+                    error: showError,
+                    success: // La fonction qui traite les résultats
+                            function (result) {
+                                // Le code source du template est dans la page
+                                var template = $('#codesTemplate').html();
+                                // On combine le template avec le résultat de la requête
+                                var processedTemplate = Mustache.to_html(template, result);
+                                // On affiche la liste des options dans le select
+                                $('#codes').html(processedTemplate);
+                          
+                                
+                                var data = google.visualization.arrayToDataTable([
+                                    ['Graphique CA', 'Categorie', 'Expenses', 'Profit'],
+                                    ['2014', 1000, 400, 200],
+                                    ['2015', 1170, 460, 250],
+                                    ['2016', 660, 1120, 300],
+                                    ['2017', 1030, 540, 350]
+                                ]);
+
+                                var options = {
+                                    chart: {
+                                        title: 'Company Performance',
+                                        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                                    }
+                                };
+
+                                var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+                                chart.draw(data, google.charts.Bar.convertOptions(options));
+                            }
+                });
+
+
+
+            }
+
+        </script>
+        <!-- un CSS pour formatter la table -->
+        <link rel="stylesheet" type="text/css" href="css/tableformat.css">
+    </head>
+    <body>
+
+        <!-- On montre le formulaire de saisie -->
+        <h1>Graphise des CA</h1>
+
+         <!-- La zone où les résultats vont s'afficher -->
+        <div id="codes"></div>
+
+        <!-- Le template qui sert à formatter la liste des codes -->
+        <script id="codesTemplate" type="text/template">
+
+
+            <TABLE>
+            <tr><th>Code</th><th>Taux</th><th>Action</th></tr>
+            {{! Pour chaque enregistrement }}
+            {{#records}}
+            {{! Une ligne dans la table }}
+            <TR><TD>{{discountCode}}</TD><TD>{{formattedRate}}</TD><TD><button onclick="deleteCode('{{discountCode}}')">Supprimer</button></TD></TR>
+            {{/records}}
+            </TABLE>
+        </script>    
+        <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+
+    </body>
+
+
 </html>
