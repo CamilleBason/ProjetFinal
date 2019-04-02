@@ -6,10 +6,9 @@
 package JDBC;
 
 import java.util.Date;
-
 /**
  *
- * @author cbason
+ * @author cptbo
  */
 public class PurchaseOrder {
         private int orderNum;

@@ -164,33 +164,7 @@ public class DAO {
         return result;
     }
 
-    /**
-     * Liste des clients localisés dans un état des USA
-     *
-     * @param state l'état à rechercher (2 caractères)
-     * @return la liste des clients habitant dans cet état
-     * @throws DAOException
-     */
-    public Map<String, Double> salesByCustomer() throws SQLException {
-		Map<String, Double> result = new HashMap<>();
-		String sql = "SELECT NAME, SUM(PURCHASE_COST * QUANTITY) AS SALES" +
-		"	      FROM CUSTOMER c" +
-		"	      INNER JOIN PURCHASE_ORDER o ON (c.CUSTOMER_ID = o.CUSTOMER_ID)" +
-		"	      INNER JOIN PRODUCT p ON (o.PRODUCT_ID = p.PRODUCT_ID)" +
-		"	      GROUP BY NAME";
-		try (Connection connection = myDataSource.getConnection(); 
-		     Statement stmt = connection.createStatement(); 
-		     ResultSet rs = stmt.executeQuery(sql)) {
-			while (rs.next()) {
-				// On récupère les champs nécessaires de l'enregistrement courant
-				String name = rs.getString("NAME");
-				double sales = rs.getDouble("SALES");
-				// On l'ajoute à la liste des résultats
-				result.put(name, sales);
-			}
-		}
-		return result;
-	}
+
 	
 
     public List<PurchaseOrder> findPurchaseOrder(int customerID) throws DAOException, SQLException {

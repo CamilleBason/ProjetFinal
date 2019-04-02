@@ -17,37 +17,6 @@
         <!-- On charge le moteur de template mustache https://mustache.github.io/ -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
 
-        <!--<script>
-            $(document).ready(// Exécuté à la fin du chargement de la page
-                    function () {
-                        // On afiche le tableau de commande du client
-                        showPurchase();
-                    }
-            );
-
-            // Afficher les clients dans l'état sélectionné
-            function showPurchase() {
-                // Quel est le client sélectionné ?
-
-                // On fait un appel AJAX pour chercher les clients de cet état
-                $.ajax({
-                    url: "Purchases",
-                    dataType: "json",
-                    success: // La fonction qui traite les résultats
-                            function (result) {
-                                $var template = $('#selectTemplate').html();
-                                // On convertit les enregistrements en table HTML
-                                $('#customers').html(processedTemplate);
-                            },
-                    error: showError
-                });
-            }
-
-            // Fonction qui traite les erreurs de la requête
-            function showError(xhr, status, message) {
-                $("#erreur").html("Erreur: " + status + " : " + message);
-            }
-        </script>-->
 
         <script>
             $(document).ready(// Exécuté à la fin du chargement de la page
