@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import com.google.gson.Gson;
 import JDBC.CustomerEntity;
 import JDBC.DAO;
 import JDBC.DAOException;
@@ -19,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  *
@@ -37,17 +39,17 @@ public class Purchases extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, DAOException {
+            throws ServletException, IOException, DAOException, SQLException {
         String userName = request.getParameter("userName");
         String userID = request.getParameter("userID");
         
         // Créér le DAO avec sa source de données
         DAO dao = new DAO(DataSourceFactory.getDataSource());
-        
+        int customerID = Integer.valueOf(userID);
         // Properties est une Map<clé, valeur> pratique pour générer du JSON
         Properties resultat = new Properties();
         try {
-            resultat.put("records", dao.purchaseOrder(userID));
+            resultat.put("records", dao.findPurchaseOrder(customerID));
         } catch (DAOException ex) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             resultat.put("records", Collections.EMPTY_LIST);
@@ -60,9 +62,8 @@ public class Purchases extends HttpServlet {
             // Générer du JSON
             // Gson gson = new Gson();
             // setPrettyPrinting pour que le JSON généré soit plus lisible
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String gsonData = gson.toJson(resultat);
-            out.println(gsonData);
+            Gson gson = new Gson();
+            out.println(gson.toJson(resultat));
         }
     }
 }

@@ -37,7 +37,7 @@
                             function (result) {
                                 $var template = $('#customerTemplate').html();
                                 // On convertit les enregistrements en table HTML
-                                $('#customers').html(processedTemplate);	
+                                $('#customers').html(processedTemplate);
                             },
                     error: showError
                 });
@@ -66,29 +66,35 @@
 
         <!-- Le template qui sert à formatter la liste des codes -->
         <script id="customerTemplate" type="text/template">
-        <TABLE id="tableau" BORDER="1">
-        {{! Un commentaire Mustache }}
-        <tr><th>Numéro du bon de commande</th><th>Client ID</th><th>ID du Produit</th><th>Quantite</th><th>Prix</th><th>Date de vente</th></tr>
-	{{! Pour chaque enregistrement }}
-	{{#records}}
-        {{! Une ligne dans la table }}
-        <tbody>
+            <TABLE id="tableau" BORDER="1">
+            {{! Un commentaire Mustache }}
+            <tr><th>Numéro du bon de commande</th><th>Client ID</th><th>ID du Produit</th><th>Quantite</th><th>Prix</th><th>Date de vente</th></tr>
+            {{! Pour chaque enregistrement }}
+            {{#records}}
+            {{! Une ligne dans la table }}
+            <tbody>
             <TR><TD>{{orderNum}}</TD><TD>{{customerId}}</TD><TD>{{productID}}</TD><TD>{{quantity}}</TD><TD>{{shippingCost}}</TD><TD>{{salesDate}}</TD><TD><button class="supprimer" onclick="deleteCode('{{orderNum}}')">Supprimer</button></TD></TR>
-        </tbody>
-        {{/records}}
-			</TABLE>
+            </tbody>
+            {{/records}}
+            </TABLE>
         </script>
-                
-		<!-- Le template qui sert à formatter la liste des clients résultats -->
-		<script id="selectTemplate" type="text/template">
-				{{! Pour chaque état dans le tableau}}
-				{{#records}}
-					{{! Une option dans le select }}
-					{{! le point représente la valeur courante du tableau }}
-					<OPTION VALUE="{{.}}">{{.}}</OPTION>
-				{{/records}}
-		</script>
 
-        </script>
-    </body>
+    </head>
+<body>
+    <h1>Bienvenue <span id="userName">${userName}</span></h1>
+    <input id="userID" type="hidden" name="userName" value="${userID}">
+
+
+    <!-- Le template qui sert à formatter la liste des clients résultats -->
+    <script id="selectTemplate" type="text/template">
+        {{! Pour chaque état dans le tableau}}
+        {{#records}}
+        {{! Une option dans le select }}
+        {{! le point représente la valeur courante du tableau }}
+        <OPTION VALUE="{{.}}">{{.}}</OPTION>
+        {{/records}}
+    </script>
+
+
+
 </html>
