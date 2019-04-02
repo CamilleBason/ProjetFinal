@@ -312,6 +312,8 @@ public int addDiscountCode(int numC, int IDclient, int prodid, int quantite, flo
 		}
                 return result;
         }
+        
+        
 
 }
 
