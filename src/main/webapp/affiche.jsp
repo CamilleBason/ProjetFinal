@@ -10,7 +10,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>You are connected</title>
+		<title>affiche</title>
 	</head>
 	<body>
 		<h1>Bienvenue ${userName}</h1>
