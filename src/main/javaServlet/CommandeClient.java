@@ -38,7 +38,8 @@ public class CommandeClient extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CommandeClient</title>");            
+            out.println("<title>Servlet CommandeClient</title>"); 
+            
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CommandeClient at " + request.getContextPath() + "</h1>");
