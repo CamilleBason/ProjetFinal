@@ -90,20 +90,21 @@
                           
                                 
                                 var data = google.visualization.arrayToDataTable([
-                                    ['Graphique CA', 'Categorie', 'Expenses', 'Profit'],
-                                    ['2014', 1000, 400, 200],
-                                    ['2015', 1170, 460, 250],
-                                    ['2016', 660, 1120, 300],
-                                    ['2017', 1030, 540, 350]
+                                    ['Graphique CA', result.records[0].discountCode,result.records[1].discountCode, result.records[2].discountCode],
+                                    ['2014', result.records[0].rate, result.records[1].rate, result.records[2].rate],
+                                    ['2015', result.records[0].rate,result.records[1].rate, result.records[2].rate],
+                                    ['2016', result.records[0].rate, result.records[1].rate, result.records[2].rate],
+                                    ['2017', result.records[0].rate,result.records[1].rate, result.records[2].rate]
+                                    
                                 ]);
-
+                                console.log(result.records[0].discountCode);
                                 var options = {
                                     chart: {
                                         title: 'Company Performance',
                                         subtitle: 'Sales, Expenses, and Profit: 2014-2017',
                                     }
                                 };
-
+console.log(result);
                                 var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
                                 chart.draw(data, google.charts.Bar.convertOptions(options));
                             }
