@@ -300,5 +300,29 @@ public class DAO {
         }
         return result;
     }
+     public List<Product> allProducts() throws SQLException {
+
+		List<Product> result = new LinkedList<>();
+
+		String sql = "SELECT * FROM PRODUCT ORDER BY PRODUCT_ID";
+		try (Connection connection = myDataSource.getConnection(); 
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {                                
+                                int prodid = rs.getInt("PRODUCT_ID");
+                                int manufac_id = rs.getInt("MANUFACTURER_ID");
+                                String code = rs.getString("PRODUCT_CODE");
+                                float cout_achat = rs.getFloat("PURCHASE_COST");
+                                int quantite_dispo = rs.getInt("QUANTITY_ON_HAND");
+                                float majoration = rs.getFloat("MARKUP");
+                                boolean dispo = rs.getBoolean("AVAILABLE");
+                                String descrip = rs.getString("DESCRIPTION");
+                                // On crée l'objet "product"
+                                Product p = new Product(prodid, manufac_id, code, cout_achat, quantite_dispo, majoration, dispo, descrip);
+                                result.add(p);
+			}
+		}
+		return result;
+	}
 
 }

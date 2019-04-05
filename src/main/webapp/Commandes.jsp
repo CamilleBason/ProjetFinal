@@ -95,7 +95,7 @@
 
 
             function modify() {
-                $.ajax({
+                    $.ajax({
                     url: "Modify",
                     data: $("#codeForm").serialize(),
                     dataType: "json",
