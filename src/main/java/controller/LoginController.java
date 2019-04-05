@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
                     checkLogin(request);
                     break;
 
-                case "logout":
+                case "Deconnexion":
                     doLogout(request);
                     break;
             }
@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
         } else { // L'utilisateur est connecté
             // On choisit la page d'affichage
             if ("Administrateur".equals(userName)) {
-                jspView = "/View/PageAdministrateur.jsp";
+                jspView = "PageChoixGraphique.jsp";
             } else {
                 jspView = "Commandes.jsp";
             }

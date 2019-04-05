@@ -301,7 +301,7 @@ font-family: "Roboto", helvetica, arial, sans-serif;}
                 </form>
 
 		<form action="<c:url value="/"/>" method="POST"> 
-			<input class='deconnexion' type='submit' name='boutonConnexion' value='Se deconnecter'>
+			<input type='submit' name='action' value='Deconnexion'>
 		</form>
 		
 	</body>

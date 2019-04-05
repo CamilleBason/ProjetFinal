@@ -313,6 +313,10 @@ font-family: "Roboto", helvetica, arial, sans-serif;}
             <OPTION VALUE="{{.}}">{{.}}</OPTION>
             {{/records}}
         </script>
+        
+        <form action="<c:url value="/"/>" method="POST"> 
+			<input type='submit' name='action' value='Deconnexion'>
+        </form>
             
     </body>
 </html>
