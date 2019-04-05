@@ -36,6 +36,7 @@ public class ListDiscountCodesServlet extends HttpServlet {
 		Properties resultat = new Properties();
 		try {
 			resultat.put("records", dao.allDiscountCodes());
+                        //resultat.put("records", dao.allCodes());
 		} catch (SQLException ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resultat.put("records", Collections.EMPTY_LIST);
