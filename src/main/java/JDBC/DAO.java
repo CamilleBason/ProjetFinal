@@ -237,9 +237,9 @@ public class DAO {
 		     PreparedStatement stmt = connection.prepareStatement(sql)) {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				int id = rs.getInt("ARBRE");
-                               int rate = rs.getInt("PRODUCT_ID");
-				DiscountCode c = new DiscountCode(id, rate);
+				int sommequantite = rs.getInt("ARBRE");
+                               int produit = rs.getInt("PRODUCT_ID");
+				DiscountCode c = new DiscountCode(sommequantite, produit);
 				result.add(c);
 			}
 		}
