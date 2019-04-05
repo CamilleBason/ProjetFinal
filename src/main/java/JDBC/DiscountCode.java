@@ -12,30 +12,30 @@ package JDBC;
 public class DiscountCode {
   
 
-	private int discountCode;
+	private String discountCode;
 
-	private int rate;
+	private float rate;
 	
-	private String formattedRate;
+	//private String formattedRate;
 
-	public DiscountCode(int code, int rate) {
+	public DiscountCode(String code, float rate) {
 		this.discountCode = code;
 		this.rate = rate;
 		//this.formattedRate = String.format("%05.2f %%", rate);
 	}
 
 
-	public int getDiscountCode() {
+	public String getDiscountCode() {
 		return discountCode;
 	}
 
-	public int getRate() {
+	public float getRate() {
 		return rate;
 	}
 	
-	public String getFormatedRate() {
-		return formattedRate;
-	}
+	//public String getFormatedRate() {
+	//	return formattedRate;
+	//}
 
 }
 

@@ -231,14 +231,16 @@ public class DAO {
 
 		List<DiscountCode> result = new LinkedList<>();
 
-		String sql ="SELECT PRODUCT_ID, SUM(QUANTITY) AS ARBRE FROM PURCHASE_ORDER GROUP BY PRODUCT_ID ";//GROUP BY PRODUCT_ID";
+		String sql ="SELECT PRODUCT_CODE.DESCRIPTION AS SA, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS CA FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID)INNER JOIN PRODUCT_CODE ON PRODUCT.PRODUCT_CODE=PRODUCT_CODE.PROD_CODE GROUP BY PRODUCT_CODE.DESCRIPTION";
+//"SELECT PRODUCT.PRODUCT_CODE AS SA, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS CA FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) GROUP BY PRODUCT_CODE";
+                        //"SELECT PRODUCT_ID, SUM(QUANTITY) AS ARBRE FROM PURCHASE_ORDER GROUP BY PRODUCT_ID ";//GROUP BY PRODUCT_ID";
 // "SELECT PRODUCT_ID, (PURCHASE_ORDER.QUANTITY * PRODUCT.PURCHASE_COST) FROM PURCHASE_ORDER INNER JOIN PRODUCT USING(PRODUCT_ID) GROUP BY PRODUCT_ID";
 		try (Connection connection = myDataSource.getConnection(); 
 		     PreparedStatement stmt = connection.prepareStatement(sql)) {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				int sommequantite = rs.getInt("ARBRE");
-                               int produit = rs.getInt("PRODUCT_ID");
+				String sommequantite = rs.getString("SA");
+                               float produit = rs.getFloat("CA");
 				DiscountCode c = new DiscountCode(sommequantite, produit);
 				result.add(c);
 			}
