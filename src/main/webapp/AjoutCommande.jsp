@@ -16,20 +16,21 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                <link rel="shortcut icon" type="image/x-icon" href="images/customer.ico">
-		<title>You are connected</title>
+                <link rel="shortcut icon" type="image/x-icon" href="Image/commande.ico">
+		<title>Ajout d'une commande</title>
                 <!-- On charge jQuery -->
                 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
                 <!-- On charge le moteur de template mustache https://mustache.github.io/ -->
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
                 <script>
+                    /*
                     $(document).ready(// Exécuté à la fin du chargement de la page
                             function () {
                                 // On montre la liste des codes
-                                showCodes();
-                                showProducts();
+                                //showCodes();
+                                //showProducts();
                             }
-                    );
+                    );*/
             
                     // Ajouter un code
                     function addCode() {
@@ -40,8 +41,9 @@
                             dataType: "json",
                             success: // La fonction qui traite les résultats
                                     function (result) {
-                                        showCodes();
+                                        //showCodes();
                                         console.log(result);
+                                        //VIDE LE FORMULAIRE
                                         toutEffacer();
                                         var mes = document.getElementById("messageAjout");
                                         mes.innerHTML = result.message;
@@ -50,6 +52,30 @@
                         });
                         return false;
                     }
+                    
+                    function toutEffacer() {
+                if (document.getElementById("Ajouter").disabled === true) {
+                    document.getElementById("Ajouter").disabled = false;
+                }
+                if (document.getElementById("Modifier").disabled === false) {
+                    document.getElementById("Modifier").disabled = true;
+                }
+                if (document.getElementById("code").getAttribute("readonly") === "readonly") {
+                    document.getElementById("code").removeAttribute("readonly");
+                }
+                var numCo = document.getElementById("code");
+                numCo.value = null;
+                var quantite = document.getElementById("quantite");
+                quantite.value = null;
+                var fraisP = document.getElementById("fraisP");
+                fraisP.value = null;
+                var dateV = document.getElementById("dateV");
+                dateV.value = null;
+                var dateE = document.getElementById("dateE");
+                dateE.value = null;
+                var transport = document.getElementById("transport");
+                transport.value = null;
+            }
                     
                     
                     // Fonction qui traite les erreurs de la requête
@@ -154,7 +180,16 @@ font-family: "Roboto", helvetica, arial, sans-serif;}
                         Frais de port : <input id="fraisP" name="fraisP" type="number" value="12" required><br/>
                         Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
                         Date d'expédition : <input id="dateE" name="dateExp" type="date" required><br/>
-                        Société de transport : <input id="transport" name="transport" type="text" size="40" required><br/>
+                        Société de transport : <select id="transport" name="transport" type="text" size="1" required>
+                            <option>
+                                <option value="Poney Express" > Poney Express</option>
+                                <option value="Slow Snail" > Slow Snail</option>
+                                <option value="Slow Snail" > Western Fast</option>
+                                <option value="Slow Snail" > We deliver</option>
+                                <option value="Coastal Freight" > Coastal Freight</option>
+                                <option value="Southern Delivery Service" > Southern Delivery Service</option
+                                <option value="FR Express" > FR Express</option>
+                               </option></select><br/>
                         <input type="submit" id="Ajouter" value="Ajouter" onclick="addCode()">
                         
                     </fieldset>

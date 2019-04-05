@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="shortcut icon" type="image/x-icon" href="image/commande.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="Image/commande.ico">
         <title>Commandes Client</title>
         <!-- On charge jQuery -->
         
@@ -94,28 +94,6 @@
             }
 
 
-
-
-            // Ajouter un code
-            function addCode() {
-                $.ajax({
-                    url: "addCode",
-                    // serialize() renvoie tous les paramètres saisis dans le formulaire
-                    data: $("#codeForm").serialize(),
-                    dataType: "json",
-                    success: // La fonction qui traite les résultats
-                            function (result) {
-                                showCodes();
-                                console.log(result);
-                                toutEffacer();
-                                var mes = document.getElementById("messageAjout");
-                                mes.innerHTML = result.message;
-                            },
-                    error: showError
-                });
-                return false;
-            }
-
             function modify() {
                 $.ajax({
                     url: "Modify",
@@ -197,29 +175,7 @@
 
             }
 
-            function toutEffacer() {
-                if (document.getElementById("Ajouter").disabled === true) {
-                    document.getElementById("Ajouter").disabled = false;
-                }
-                if (document.getElementById("Modifier").disabled === false) {
-                    document.getElementById("Modifier").disabled = true;
-                }
-                if (document.getElementById("code").getAttribute("readonly") === "readonly") {
-                    document.getElementById("code").removeAttribute("readonly");
-                }
-                var numCo = document.getElementById("code");
-                numCo.value = null;
-                var quantite = document.getElementById("quantite");
-                quantite.value = null;
-                var fraisP = document.getElementById("fraisP");
-                fraisP.value = null;
-                var dateV = document.getElementById("dateV");
-                dateV.value = null;
-                var dateE = document.getElementById("dateE");
-                dateE.value = null;
-                var transport = document.getElementById("transport");
-                transport.value = null;
-            }
+            
 
             // Fonction qui traite les erreurs de la requête
             function showError(xhr, status, message) {

@@ -21,7 +21,7 @@ import JDBC.DataSourceFactory;
 
 /**
  *
- * @author cptbo
+ * @author cbason
  */
 @WebServlet(name = "codesInJSON", urlPatterns = {"/allCodes"})
 public class ListCodesJsonServlet extends HttpServlet {
