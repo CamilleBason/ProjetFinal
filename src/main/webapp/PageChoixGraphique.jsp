@@ -61,9 +61,9 @@
         </head>
         <body>
             <h1>Bienvenue <span id="userName">${userName}</span></h1>
-        <button class="Graphique1" onclick="window.location = '/View/PageAdministrateur1.jsp'">Chiffre d'affaire par catégorie article</button>
-        <button class="Graphique2" onclick="window.location = '/View/PageAdministrateur2.jsp'">Chiffre d'affaire par zonne géographique</button>
-        <button class="Graphique3" onclick="window.location = '/View/PageAdministrateur3.jsp'">Chiffre d'affaire par client</button>
+        <button class="Graphique1" onclick="window.location = 'View/PageAdministrateur1.jsp'">Chiffre d'affaire par catégorie article</button>
+        <button class="Graphique2" onclick="window.location = 'View/PageAdministrateur2.jsp'">Chiffre d'affaire par zonne géographique</button>
+        <button class="Graphique3" onclick="window.location = 'View/PageAdministrateur3.jsp'">Chiffre d'affaire par client</button>
 
         <form action="<c:url value="/"/>" method="POST"> 
             <input type='submit' name='action' value='Deconnexion'>
