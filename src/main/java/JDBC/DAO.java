@@ -231,14 +231,15 @@ public class DAO {
 
 		List<DiscountCode> result = new LinkedList<>();
 
-		String sql = "SELECT * FROM DISCOUNT_CODE ORDER BY DISCOUNT_CODE";
+		String sql ="SELECT PRODUCT_ID, SUM(QUANTITY) AS ARBRE FROM PURCHASE_ORDER GROUP BY PRODUCT_ID ";//GROUP BY PRODUCT_ID";
+// "SELECT PRODUCT_ID, (PURCHASE_ORDER.QUANTITY * PRODUCT.PURCHASE_COST) FROM PURCHASE_ORDER INNER JOIN PRODUCT USING(PRODUCT_ID) GROUP BY PRODUCT_ID";
 		try (Connection connection = myDataSource.getConnection(); 
 		     PreparedStatement stmt = connection.prepareStatement(sql)) {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				String id = rs.getString("DISCOUNT_CODE");
-				float rate = rs.getFloat("RATE");
-				DiscountCode c = new DiscountCode(id, rate);
+				int sommequantite = rs.getInt("ARBRE");
+                               int produit = rs.getInt("PRODUCT_ID");
+				DiscountCode c = new DiscountCode(sommequantite, produit);
 				result.add(c);
 			}
 		}
