@@ -87,15 +87,15 @@
                                 var processedTemplate = Mustache.to_html(template, result);
                                 // On affiche la liste des options dans le select
                                 $('#codes').html(processedTemplate);
-                          
-                                
+
+
                                 var data = google.visualization.arrayToDataTable([
-                                    ['Graphique CA', result.records[0].discountCode,result.records[1].discountCode, result.records[2].discountCode],
+                                    ['Graphique CA', result.records[0].discountCode, result.records[1].discountCode, result.records[2].discountCode],
                                     ['2014', result.records[0].rate, result.records[1].rate, result.records[2].rate],
-                                    ['2015', result.records[0].rate,result.records[1].rate, result.records[2].rate],
+                                    ['2015', result.records[0].rate, result.records[1].rate, result.records[2].rate],
                                     ['2016', result.records[0].rate, result.records[1].rate, result.records[2].rate],
-                                    ['2017', result.records[0].rate,result.records[1].rate, result.records[2].rate]
-                                    
+                                    ['2017', result.records[0].rate, result.records[1].rate, result.records[2].rate]
+
                                 ]);
                                 console.log(result.records[0].discountCode);
                                 var options = {
@@ -104,7 +104,7 @@
                                         subtitle: 'Sales, Expenses, and Profit: 2014-2017',
                                     }
                                 };
-console.log(result);
+                                console.log(result);
                                 var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
                                 chart.draw(data, google.charts.Bar.convertOptions(options));
                             }
@@ -140,6 +140,9 @@ console.log(result);
             </TABLE>
         </script>    
         <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+        <form action="<c:url value="/"/>" method="POST"> 
+              <input type='submit' name='action' value='Deconnexion'>
+        </form>
 
     </body>
 
