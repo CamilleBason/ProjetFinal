@@ -33,12 +33,10 @@ function addCode() {
 function fillIDSelector() {
     // On fait un appel AJAX pour chercher les états existants
     $.ajax({
-        url: "/AddIdProducts",
+        url: "AddIdProducts",
         dataType: "json",
         error: showError,
         success: // La fonction qui traite les résultats
-                // Pour chaque état dans le résultat
-
                     function (result) {
                         // Le code source du template est dans la page
                         var template = $('#selectTemplate').html();
@@ -46,9 +44,7 @@ function fillIDSelector() {
                         var processedTemplate = Mustache.to_html(template, result);
                         // On affiche la liste des options dans le select
                         $('#ID').html(processedTemplate);
-                        // On initialise l'affichage des clients
-                        addCode();
-                    }
+                        }
                 });
     }
 

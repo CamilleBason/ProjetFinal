@@ -56,7 +56,7 @@
 
                 <!--ID du Produit :
                 <select id="prodid" name="prodid" size="1" required>
-                    <option>
+                   
                     <option value="948933" > Computer tool Kit</option>
                     <option value="958888" > Ultra Spacr</option>
                     <option value="958889" >686 7Ghz Computer </option>
@@ -87,14 +87,14 @@
                     <option value="986733" > A1 900 watts Speakers</option>
                     <option value="986734" >Mini Computer Speakers </option>
                     <option value="988765" >104-Key Keyboard </option>
-                    </option></select><br/>-->
+                    </select><br>-->
 
                 Quantité : <input id="quantite" name="quantite" type="number" required><br/>
                 Frais de port : <input id="fraisP" name="fraisP" type="number" value="12" required><br/>
                 Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
                 Date d'expédition : <input id="dateE" name="dateExp" type="date" required><br/>
                 Société de transport : <select id="transport" name="transport" type="text" size="1" required>
-                    <option>
+
                     <option value="Poney Express" > Poney Express</option>
                     <option value="Slow Snail" > Slow Snail</option>
                     <option value="Slow Snail" > Western Fast</option>
@@ -102,7 +102,7 @@
                     <option value="Coastal Freight" > Coastal Freight</option>
                     <option value="Southern Delivery Service" > Southern Delivery Service</option
                     <option value="FR Express" > FR Express</option>
-                    </option></select><br/>
+                </select><br/>
                 <input type="submit" id="Ajouter" value="Ajouter" onclick="addCode()">
 
             </fieldset>
