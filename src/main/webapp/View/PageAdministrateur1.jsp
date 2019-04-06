@@ -140,8 +140,8 @@
             </TABLE>
         </script>    
         <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-        <form action="<c:url value="/"/>" method="POST"> 
-              <input type='submit' name='action' value='Deconnexion'>
+        <form action="<c:url value='/'/>" method="POST"> 
+			<input type='submit' name='action' value='Deconnexion'>
         </form>
 
     </body>
