@@ -7,6 +7,7 @@
 $(document).ready(// Exécuté à la fin du chargement de la page
         function () {
             fillIDSelector();
+            fillTransportSelector();
         }
 );
 
@@ -44,6 +45,24 @@ function fillIDSelector() {
                         var processedTemplate = Mustache.to_html(template, result);
                         // On affiche la liste des options dans le select
                         $('#ID').html(processedTemplate);
+                        }
+                });
+    }
+    
+    function fillTransportSelector() {
+    // On fait un appel AJAX pour chercher les états existants
+    $.ajax({
+        url: "AddNameManufacturer",
+        dataType: "json",
+        error: showError,
+        success: // La fonction qui traite les résultats
+                    function (result) {
+                        // Le code source du template est dans la page
+                        var template = $('#selectTemplate2').html();
+                        // On combine le template avec le résultat de la requête
+                        var processedTemplate = Mustache.to_html(template, result);
+                        // On affiche la liste des options dans le select
+                        $('#Transport').html(processedTemplate);
                         }
                 });
     }

@@ -344,5 +344,22 @@ public class DAO {
 		}
 		return result;
 	}
+         public List<String> nameManufacturer(){
+        List<String> result = new ArrayList<>();
+		String sql = "SELECT DISTINCT NAME FROM MANUFACTURER";
+		try ( Connection connection = myDataSource.getConnection(); 
+		      Statement stmt = connection.createStatement(); 
+		      ResultSet rs = stmt.executeQuery(sql)) {
+			while (rs.next()) {
+				// On récupère les champs nécessaires de l'enregistrement courant
+				String name = rs.getString("NAME");
+				// On l'ajoute à la liste des résultats
+				result.add(name);
+			}
+		} catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return result;
+    }
 
 }

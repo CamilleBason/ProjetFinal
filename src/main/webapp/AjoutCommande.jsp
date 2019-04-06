@@ -93,24 +93,36 @@
                 Frais de port : <input id="fraisP" name="fraisP" type="number" value="12" required><br/>
                 Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
                 Date d'expédition : <input id="dateE" name="dateExp" type="date" required><br/>
-                Société de transport : <select id="transport" name="transport" type="text" size="1" required>
+                <script id="selectTemplate2" type="text/template">
+                    {{! Pour chaque état dans le tableau}}
+                    {{#records}}
+                    {{! Une option dans le select }}
+                    {{! le point représente la valeur courante du tableau }}
+                    <OPTION VALUE="{{.}}">{{.}}</OPTION>
+                    {{/records}}
+                </script>
+                <form>
+                    <label for="Transport">Société de transport :</label>
+                    <select id="Transport"></select>
+                </form>
 
-                    <option value="Poney Express" > Poney Express</option>
-                    <option value="Slow Snail" > Slow Snail</option>
-                    <option value="Slow Snail" > Western Fast</option>
-                    <option value="Slow Snail" > We deliver</option>
-                    <option value="Coastal Freight" > Coastal Freight</option>
-                    <option value="Southern Delivery Service" > Southern Delivery Service</option
-                    <option value="FR Express" > FR Express</option>
-                </select><br/>
+                <!--Société de transport : <select id="transport" name="transport" type="text" size="1" required>
+                <option value="Poney Express" > Poney Express</option>
+                <option value="Slow Snail" > Slow Snail</option>
+                <option value="Slow Snail" > Western Fast</option>
+                <option value="Slow Snail" > We deliver</option>
+                <option value="Coastal Freight" > Coastal Freight</option>
+                <option value="Southern Delivery Service" > Southern Delivery Service</option
+                <option value="FR Express" > FR Express</option>
+            </select><br/>-->
                 <input type="submit" id="Ajouter" value="Ajouter" onclick="addCode()">
 
             </fieldset>
         </form>
 
-        <form action="<c:url value="/"/>" method="POST"> 
-            <input type='submit' name='action' value='Deconnexion'>
-        </form>
+            <form action="<c:url value="/"/>" method="POST"> 
+                <input type='submit' name='action' value='Deconnexion'>
+            </form>
 
     </body>
 </html>
