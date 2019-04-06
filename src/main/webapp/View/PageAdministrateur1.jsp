@@ -1,3 +1,4 @@
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
     Document   : PageAdministrateur
     Created on : 26 mars 2019, 14:37:09
@@ -140,6 +141,7 @@
             </TABLE>
         </script>    
         <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+        
         <form action="<c:url value='/'/>" method="POST"> 
 			<input type='submit' name='action' value='Deconnexion'>
         </form>

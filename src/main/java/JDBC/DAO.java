@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -50,6 +51,23 @@ public class DAO {
             throw new DAOException(ex.getMessage());
         }
         return login;
+    }
+    public List<Integer> idProducts(){
+        List<Integer> result = new ArrayList<>();
+		String sql = "SELECT DISTINCT PRODUCT_ID FROM PRODUCT";
+		try ( Connection connection = myDataSource.getConnection(); 
+		      Statement stmt = connection.createStatement(); 
+		      ResultSet rs = stmt.executeQuery(sql)) {
+			while (rs.next()) {
+				// On récupère les champs nécessaires de l'enregistrement courant
+				Integer id = rs.getInt("PRODUCT_ID");
+				// On l'ajoute à la liste des résultats
+				result.add(id);
+			}
+		} catch (SQLException ex) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+		return result;
     }
 
     /**
