@@ -1,4 +1,4 @@
-package servlet;
+package Servlet;
 
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import JDBC.DataSourceFactory;
 
 /**
  *
- * @author cptbo
+ * @author cbason
  */
 @WebServlet(name = "deleteDiscountCode", urlPatterns = {"/deleteCode"})
 public class DeleteCodeJsonServlet extends HttpServlet {
