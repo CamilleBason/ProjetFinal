@@ -124,7 +124,7 @@
     <body>
 
         <!-- On montre le formulaire de saisie -->
-        <h1>Graphise des CA</h1>
+        <h1>Graphique des CA par catégorie d'article</h1>
 
          <!-- La zone où les résultats vont s'afficher -->
         <div id="codes"></div>
@@ -134,12 +134,15 @@
 
 
             <TABLE>
-            <tr><th>Code</th><th>Taux</th><th>Action</th></tr>
+            <tr><th>Pèriode</th></tr>
             {{! Pour chaque enregistrement }}
-            {{#records}}
+         {{#records}}
             {{! Une ligne dans la table }}
-            <TR><TD>{{discountCode}}</TD><TD>{{formattedRate}}</TD><TD><button onclick="deleteCode('{{discountCode}}')">Supprimer</button></TD></TR>
-            {{/records}}
+                 Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
+            <TR><TD>Date de début</TD><TD><button onclick="deleteCode('{{discountCode}}')">Entrer</button></TD></TR>
+             <TR><TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Entrer</button></TD></TR>
+             <!--<TR><TD>Date de début</TD><TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Supprimer</button></TD></TR>
+                            {{/records}}
             </TABLE>
         </script>    
         <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
