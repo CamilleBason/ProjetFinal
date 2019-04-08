@@ -89,16 +89,18 @@
                                 // On affiche la liste des options dans le select
                                 $('#codes').html(processedTemplate);
 
-
+                             
                                 var data = google.visualization.arrayToDataTable([
-                                    ['Graphique CA', result.records[0].discountCode, result.records[1].discountCode, result.records[2].discountCode],
-                                    ['2014', result.records[0].rate, result.records[1].rate, result.records[2].rate],
-                                    ['2015', result.records[0].rate, result.records[1].rate, result.records[2].rate],
-                                    ['2016', result.records[0].rate, result.records[1].rate, result.records[2].rate],
-                                    ['2017', result.records[0].rate, result.records[1].rate, result.records[2].rate]
+                                
+                                    ['Graphique CA', result.records[0].discountCode, result.records[1].discountCode, result.records[2].discountCode,result.records[3].discountCode,result.records[4].discountCode],
+                                    ['2014', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate]
+                                    //['2015', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
+                                    //['2016', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
+                                    //['2017', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate]
 
                                 ]);
                                 console.log(result.records[0].discountCode);
+                                console.log(result.records.length);
                                 var options = {
                                     chart: {
                                         title: 'Company Performance',
