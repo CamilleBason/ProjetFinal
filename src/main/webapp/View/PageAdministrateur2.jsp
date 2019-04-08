@@ -1,9 +1,10 @@
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
-    Document   : PageAdministrateur
-    Created on : 26 mars 2019, 14:37:09
+    Document   : GraphiqueZone
+    Created on : 8 avr. 2019, 15:24:02
     Author     : crouvera
 --%>
+
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -77,7 +78,7 @@
 
             function drawChart(result) {
                 $.ajax({
-                    url: "http://localhost:8080/ProjetFinal/allDiscountCodes",
+                    url: "http://localhost:8080/ProjetFinal/ZoneGeographique",
                     dataType: "json",
                     error: showError,
                     success: // La fonction qui traite les résultats

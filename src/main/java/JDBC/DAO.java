@@ -265,6 +265,26 @@ public class DAO {
 		}
 		return result;
 	}
+      public List<DiscountCode> ZoneGeographique() throws SQLException {
+
+		List<DiscountCode> result = new LinkedList<>();
+
+		String sql ="SELECT CUSTOMER.CITY AS VILLE, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS PRIX FROM CUSTOMER INNER JOIN PURCHASE_ORDER USING(CUSTOMER_ID) GROUP BY CUSTOMER.CITY";
+//"SELECT PRODUCT.PRODUCT_CODE AS SA, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS CA FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) GROUP BY PRODUCT_CODE";
+                        //"SELECT PRODUCT_ID, SUM(QUANTITY) AS ARBRE FROM PURCHASE_ORDER GROUP BY PRODUCT_ID ";//GROUP BY PRODUCT_ID";
+// "SELECT PRODUCT_ID, (PURCHASE_ORDER.QUANTITY * PRODUCT.PURCHASE_COST) FROM PURCHASE_ORDER INNER JOIN PRODUCT USING(PRODUCT_ID) GROUP BY PRODUCT_ID";
+		try (Connection connection = myDataSource.getConnection(); 
+		     PreparedStatement stmt = connection.prepareStatement(sql)) {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String sommequantite = rs.getString("SA");
+                               float produit = rs.getFloat("CA");
+				DiscountCode c = new DiscountCode(sommequantite, produit);
+				result.add(c);
+			}
+		}
+		return result;
+	}
 
     public int addDiscountCode(int numC, int IDclient, int prodid, int quantite, float fraisPort, Date dateVente, Date dateExp, String transport) throws SQLException {
         int result = 0;
