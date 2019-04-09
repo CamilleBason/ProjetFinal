@@ -39,7 +39,7 @@ public class AddNameManufacturer extends HttpServlet {
         DAO dao = new DAO(DataSourceFactory.getDataSource());
         // Properties est une Map<clé, valeur> pratique pour générer du JSON
         Properties resultat = new Properties();
-        resultat.put("records", dao.nameManufacturer());
+        resultat.put("records", dao.nameCompany());
 
         try (PrintWriter out = response.getWriter()) {
             // On spécifie que la servlet va générer du JSON

@@ -364,15 +364,15 @@ public class DAO {
 		}
 		return result;
 	}
-         public List<String> nameManufacturer(){
+         public List<String> nameCompany(){
         List<String> result = new ArrayList<>();
-		String sql = "SELECT DISTINCT NAME FROM MANUFACTURER";
+		String sql = "SELECT DISTINCT FREIGHT_COMPANY FROM PURCHASE_ORDER";
 		try ( Connection connection = myDataSource.getConnection(); 
 		      Statement stmt = connection.createStatement(); 
 		      ResultSet rs = stmt.executeQuery(sql)) {
 			while (rs.next()) {
 				// On récupère les champs nécessaires de l'enregistrement courant
-				String name = rs.getString("NAME");
+				String name = rs.getString("FREIGHT_COMPANY");
 				// On l'ajoute à la liste des résultats
 				result.add(name);
 			}

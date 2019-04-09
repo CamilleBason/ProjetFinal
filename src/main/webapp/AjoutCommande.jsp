@@ -54,41 +54,6 @@
                     <select id="ID"></select>
                 </form>
 
-                <!--ID du Produit :
-                <select id="prodid" name="prodid" size="1" required>
-                   
-                    <option value="948933" > Computer tool Kit</option>
-                    <option value="958888" > Ultra Spacr</option>
-                    <option value="958889" >686 7Ghz Computer </option>
-                    <option value="964025" >Jax WS </option>
-                    <option value="964026" > JavaEE 6</option>
-                    <option value="964027" > Java Application Development</option>
-                    <option value="964028" > Netbeans Development Environment</option>
-                    <option value="971266" >Network Cable </option>
-                    <option value="975789" >Learn Solaris 10 </option>
-                    <option value="978493" >Client Server Testing </option>
-                    <option value="978494" > Learn Java in 1/2 hours</option>
-                    <option value="978495" >Writing Web Service Applications</option>
-                    <option value="980001" > Identity Server </option>
-                    <option value="980002" > Corporate Expense Survey</option>
-                    <option value="980005" > Accounting Application</option>
-                    <option value="980025" > 1Ghz Sun Blade Computer</option>
-                    <option value="980030" > 10Gb Ram</option>
-                    <option value="980031" >Sun Studio C++</option>
-                    <option value="980032" >Sound Card  </option>
-                    <option value="980122" > Solaris x86 Computer</option>
-                    <option value="980500" > Learn NetBeans</option>
-                    <option value="980601" > 300Mhz Pentium Computer</option>
-                    <option value="984666" >Flat screen Monitor </option>
-                    <option value="985510" > 24 inch digital monitor</option>
-                    <option value="986420" >Directory Server </option>
-                    <option value="986710" >Printer Cable </option>
-                    <option value="986712" >512X IDE DVD-ROM </option>
-                    <option value="986733" > A1 900 watts Speakers</option>
-                    <option value="986734" >Mini Computer Speakers </option>
-                    <option value="988765" >104-Key Keyboard </option>
-                    </select><br>-->
-
                 Quantité : <input id="quantite" name="quantite" type="number" required><br/>
                 Frais de port : <input id="fraisP" name="fraisP" type="number" value="12" required><br/>
                 Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
@@ -105,16 +70,6 @@
                     <label for="Transport">Société de transport :</label>
                     <select id="Transport"></select>
                 </form>
-
-                <!--Société de transport : <select id="transport" name="transport" type="text" size="1" required>
-                <option value="Poney Express" > Poney Express</option>
-                <option value="Slow Snail" > Slow Snail</option>
-                <option value="Slow Snail" > Western Fast</option>
-                <option value="Slow Snail" > We deliver</option>
-                <option value="Coastal Freight" > Coastal Freight</option>
-                <option value="Southern Delivery Service" > Southern Delivery Service</option
-                <option value="FR Express" > FR Express</option>
-            </select><br/>-->
                 <input type="submit" id="Ajouter" value="Ajouter" onclick="addCode()">
 
             </fieldset>

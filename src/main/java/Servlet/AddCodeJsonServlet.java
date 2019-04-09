@@ -38,7 +38,7 @@ public class AddCodeJsonServlet extends HttpServlet {
 		DAO dao = new DAO(DataSourceFactory.getDataSource());
 		String numC = request.getParameter("code");
 		String client = request.getParameter("taux");
-                String prodid = request.getParameter("prodid");
+                String prodid = request.getParameter("idProduct");
                 String quantite = request.getParameter("quantite");
                 String fraisPort = request.getParameter("fraisP");
                 String dateVente = request.getParameter("dateVente");

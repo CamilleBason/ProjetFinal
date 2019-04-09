@@ -22,10 +22,7 @@ function addCode() {
                 function (result) {
                     //showCodes();
                     console.log(result);
-                    //VIDE LE FORMULAIRE
-                    toutEffacer();
-                    var mes = document.getElementById("messageAjout");
-                    mes.innerHTML = result.message;
+                    
                 },
         error: showError
     });
@@ -66,34 +63,6 @@ function fillIDSelector() {
                         }
                 });
     }
-
-
-
-
-
-function toutEffacer() {
-    if (document.getElementById("Ajouter").disabled === true) {
-        document.getElementById("Ajouter").disabled = false;
-    }
-    if (document.getElementById("Modifier").disabled === false) {
-        document.getElementById("Modifier").disabled = true;
-    }
-    if (document.getElementById("code").getAttribute("readonly") === "readonly") {
-        document.getElementById("code").removeAttribute("readonly");
-    }
-    var numCo = document.getElementById("code");
-    numCo.value = null;
-    var quantite = document.getElementById("quantite");
-    quantite.value = null;
-    var fraisP = document.getElementById("fraisP");
-    fraisP.value = null;
-    var dateV = document.getElementById("dateV");
-    dateV.value = null;
-    var dateE = document.getElementById("dateE");
-    dateE.value = null;
-    var transport = document.getElementById("transport");
-    transport.value = null;
-}
 
 
 // Fonction qui traite les erreurs de la requête
