@@ -24,7 +24,27 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
 
         <script src="./js/ajoutCommande.js"></script> 
-        <link rel="stylesheet" href="./css/ajoutCommande.css">               
+        <link rel="stylesheet" href="./css/ajoutCommande.css">  
+        <script>
+function addCode() {
+                        $.ajax({
+                            url: "addCode",
+                            // serialize() renvoie tous les paramètres saisis dans le formulaire
+                            data: $("#codeForm").serialize(),
+                            dataType: "json",
+                            success: // La fonction qui traite les résultats
+                                    function (result) {
+                                        //showCodes();
+                                        console.log("ajout");
+                                        //toutEffacer();
+                                        //var mes = document.getElementById("messageAjout");
+                                        //mes.innerHTML = result.message;
+                                    },
+                            error: showError
+                        });
+                        return false;
+                    }
+</script>
     </head>
     <body>
         <h1>Ajout d'une commande</h1>
