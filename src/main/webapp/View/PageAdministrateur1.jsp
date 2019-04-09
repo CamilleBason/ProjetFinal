@@ -124,6 +124,7 @@
     <body>
 
         <!-- On montre le formulaire de saisie -->
+        <button class="ajouter" onclick="window.location='PageChoixGraphique.jsp'">Retour à la page d'acceuil adminsitrateur</button>
         <h1>Graphique des CA par catégorie d'article</h1>
 
          <!-- La zone où les résultats vont s'afficher -->
