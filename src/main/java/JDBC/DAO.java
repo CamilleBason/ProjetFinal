@@ -286,7 +286,7 @@ public class DAO {
 		return result;
 	}
 
-    public int addDiscountCode(int numC, int IDclient, int prodid, int quantite, float fraisPort, Date dateVente, Date dateExp, String transport) throws SQLException {
+    public int addDiscountCode(int numC, int IDclient, int selectTemplate, int quantite, float fraisPort, Date dateVente, Date dateExp, String selectTemplate2) throws SQLException {
         int result = 0;
 
         String sql = "INSERT INTO PURCHASE_ORDER VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -294,12 +294,12 @@ public class DAO {
                 PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, numC);
             stmt.setInt(2, IDclient);
-            stmt.setInt(3, prodid);
+            stmt.setInt(3, selectTemplate);
             stmt.setInt(4, quantite);
             stmt.setFloat(5, fraisPort);
             stmt.setDate(6, (java.sql.Date) dateVente);
             stmt.setDate(7, (java.sql.Date) dateExp);
-            stmt.setString(8, transport);
+            stmt.setString(8, selectTemplate2);
             result = stmt.executeUpdate();
         }
         return result;

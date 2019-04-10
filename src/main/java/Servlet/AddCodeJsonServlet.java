@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package Servlet;
 
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -38,12 +38,12 @@ public class AddCodeJsonServlet extends HttpServlet {
 		DAO dao = new DAO(DataSourceFactory.getDataSource());
 		String numC = request.getParameter("code");
 		String client = request.getParameter("taux");
-                String prodid = request.getParameter("idProduct");
+                String prodid = request.getParameter("selectTemplate");
                 String quantite = request.getParameter("quantite");
                 String fraisPort = request.getParameter("fraisP");
                 String dateVente = request.getParameter("dateVente");
                 String dateExp = request.getParameter("dateExp");
-                String transport = request.getParameter("transport");
+                String transport = request.getParameter("selectTemplate2");
 
 
 		String message;
