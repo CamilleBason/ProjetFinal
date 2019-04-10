@@ -18,9 +18,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
         <script src="./js/commandes.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/commandes.css">
+        <link rel="stylesheet" href="./css/modifierCommande.css">
 
-        <script>
+        <!--<script>
             function modeModifier(ligneSelectionne) {
 
                 var numCo = document.getElementById("code");
@@ -44,7 +44,7 @@
 
                 numCo.focus();
             }
-        </script>
+        </script>-->
 
     </head>
     <body>
@@ -52,7 +52,7 @@
 
         <form id="codeForm" onsubmit="event.preventDefault();">
             <fieldset><legend>Saisie d'un bon de commande</legend>
-                Numéro du bon de commande : <input id="code" name="code" value="${code}" type="number" required><br/>
+                Numéro du bon de commande : <input id="code" name="id" value="<%=request.getAttribute("id")%>" type="text" required><br/>
                 Client ID : <input id="taux" name="taux" value="${userID}" readonly="readonly" required><br/>
                 ID du Produit : <select id="prodid" name="prodid" size="1" required>
                     <option>---</option></select><br/>
@@ -61,9 +61,6 @@
                 Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
                 Date d'expédition : <input id="dateE" name="dateExp" type="date" required><br/>
                 Société de transport : <input id="transport" name="transport" type="text" size="40" required><br/>
-                <input type="submit" id="Ajouter" value="Ajouter" onclick="addCode()">
-                <input type="submit" id="Modifier" value="Modifier" onclick="modify()">
-                <input type="submit" id="ToutEffacer" value="Effacer">
             </fieldset>
         </form>
 

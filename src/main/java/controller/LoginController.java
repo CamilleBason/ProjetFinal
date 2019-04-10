@@ -6,7 +6,6 @@ import JDBC.DAOException;
 import JDBC.DataSourceFactory;
 import java.io.IOException;
 
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

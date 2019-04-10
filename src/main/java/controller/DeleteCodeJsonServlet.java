@@ -1,4 +1,4 @@
-package Servlet;
+package controller;
 
 import com.google.gson.Gson;
 import java.io.IOException;

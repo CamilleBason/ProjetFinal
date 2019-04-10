@@ -5,6 +5,12 @@
  */
 package controller;
 
+/**
+ *
+ * @author crouvera
+ */
+
+
 import JDBC.DAO;
 import JDBC.DataSourceFactory;
 import com.google.gson.Gson;
@@ -24,8 +30,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author crouvera
  */
-@WebServlet(name = "ListDiscountCodesServlet", urlPatterns = {"/allDiscountCodes"})
-public class ListDiscountCodesServlet extends HttpServlet {
+@WebServlet(name = "GraphiqueClient", urlPatterns = {"/GraphiqueClient"})
+public class GraphiqueClient extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
@@ -35,9 +41,10 @@ public class ListDiscountCodesServlet extends HttpServlet {
 
 		Properties resultat = new Properties();
 		try {
-			resultat.put("records", dao.allDiscountCodes());
+			resultat.put("records", dao.GraphClient());
                         //resultat.put("records", dao.allCodes());
-		} catch (SQLException ex) {
+		}
+                catch (SQLException ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resultat.put("records", Collections.EMPTY_LIST);
 			resultat.put("message", ex.getMessage());
