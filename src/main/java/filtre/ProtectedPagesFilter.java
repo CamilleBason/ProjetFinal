@@ -32,7 +32,7 @@ public class ProtectedPagesFilter implements Filter {
 				chain.doFilter(request, response);
 			} else {
 				// Pas connecté, on va vers la page de login (racine)
-				((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/");
+				((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/login");
 			}
 		} catch (IOException | ServletException t) {
 		}
