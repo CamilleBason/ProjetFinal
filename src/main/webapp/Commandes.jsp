@@ -92,6 +92,7 @@
                     }
 
             // Ajouter un code
+            /*
             function addCode() {
                 $.ajax({
                     url: "addCode",
@@ -106,7 +107,7 @@
                     error: showError
                 });
                 return false;
-            }
+            }*/
 
             // Supprimer un code
             function deleteCode(code) {

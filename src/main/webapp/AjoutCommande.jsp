@@ -28,6 +28,7 @@
         <script>
 function addCode() {
                         $.ajax({
+                            //on recupère la servlet AddCodeJsonServlet
                             url: "addCode",
                             // serialize() renvoie tous les paramètres saisis dans le formulaire
                             data: $("#codeForm").serialize(),
@@ -37,8 +38,8 @@ function addCode() {
                                         //showCodes();
                                         console.log("ajout");
                                         //toutEffacer();
-                                        //var mes = document.getElementById("messageAjout");
-                                        //mes.innerHTML = result.message;
+                                        var mes = document.getElementById("messageAjout");
+                                        mes.innerHTML = result.message;
                                     },
                             error: showError
                         });
