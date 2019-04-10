@@ -17,7 +17,8 @@
          <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <!-- On charge le moteur de template mustache https://mustache.github.io/ -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
-        <script src="./js/commandes.js"></script> 
+        <script src="./js/commandes.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="./css/commandes.css">
 <script>
             $(document).ready(// Exécuté à la fin du chargement de la page
@@ -130,50 +131,72 @@
 
         </script>    </head>
     <body>
-        <h1>Bienvenue <span id="userName">${userName}</span></h1>
+        <div class="container">
+            <h1 class="text-primary">Bienvenue <span id="userName">${userName}</span></h1>
 
-        <input id="userID" type="hidden" name="userName" value="${userID}">
-        <!-- La zone d'erreur -->
-        <div id="erreur"></div>
+            <input id="userID" type="hidden" name="userName" value="${userID}">
+            <!-- La zone d'erreur -->
+            <div id="erreur"></div>
 
-        <h2>Vos bons de commande : </h2>
-        <!-- La zone où les résultats vont s'afficher -->
-        <div id="codes"></div>
+            <h2>Vos bons de commande : </h2>
+            <!-- La zone où les résultats vont s'afficher -->
+            <div id="codes"></div>
 
-        <!-- Le template qui sert à formatter la liste des codes -->
-        <script id="codesTemplate" type="text/template">
-            <TABLE id="tableau">
-            <thead>
-            <tr><th>Numéro du bon de commande</th><th>Client ID</th><th>ID du Produit</th><th>Quantite</th><th>Frais de port</th><th>Date de vente</th><th>Date d'expédition</th><th>Suppression</th><th>Modifier</th></tr>
-            </thead>
-            <!--                         test : {{customerId}}==${userID}>-->
-            {{! Pour chaque enregistrement }}
-            {{#records}}
-            {{! Une ligne dans la table }}
-            <tbody>
-            <TR><TD>{{orderNum}}</TD><TD>{{customerId}}</TD><TD>{{productID}}</TD><TD>{{quantity}}</TD><TD>{{shippingCost}}</TD><TD>{{salesDate}}</TD><TD>{{shippingDate}}</TD><TD><button class="supprimer" onclick="deleteCode('{{orderNum}}')">Supprimer</button></TD><TD><button class="supprimer" onclick="deleteCode('{{orderNum}}')">Modifier</button></TD></TR>
-            </tbody>
-            {{/records}}
+            <!-- Le template qui sert à formatter la liste des codes -->
+            <script id="codesTemplate" type="text/template">
+                <TABLE id="tableau" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Numéro du bon de commande</th>
+                    <th>Client ID</th>
+                    <th>ID du Produit</th>
+                    <th>Quantite</th>
+                    <th>Frais de port</th>
+                    <th>Date de vente</th>
+                    <th>Date d'expédition</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+                </thead>
+                <!--                         test : {{customerId}}==${userID}>-->
+                {{! Pour chaque enregistrement }}
+                {{#records}}
+                {{! Une ligne dans la table }}
+                <tbody>
+                <TR>
+                    <TD>{{orderNum}}</TD>
+                    <TD>{{customerId}}</TD>
+                    <TD>{{productID}}</TD>
+                    <TD>{{quantity}}</TD>
+                    <TD>{{shippingCost}}</TD>
+                    <TD>{{salesDate}}</TD>
+                    <TD>{{shippingDate}}</TD>
+                    <TD><button class="btn btn-danger" onclick="deleteCode('{{orderNum}}')">Supprimer</button></TD>
+                    <TD><button class="btn btn-info" onclick="deleteCode('{{orderNum}}')">Modifier</button>
+                    </TD>
+                </TR>
+                </tbody>
+                {{/records}}
 
-            </TABLE>
-            <p>
-            
-           </p>
-        <button class="ajouter" onclick="window.location='AjoutCommande.jsp'">Ajouter une commande</button>
-        </script>
+                </TABLE>
+                <p>
 
-        <script id="selectTemplate" type="text/template">
-            {{! Pour chaque état dans le tableau}}
-            {{#records}}
-            {{! Une option dans le select }}
-            {{! le point représente la valeur courante du tableau }}
-            <OPTION VALUE="{{.}}">{{.}}</OPTION>
-            {{/records}}
-        </script>
-        
-        <form action="<c:url value="/"/>" method="POST"> 
-			<input type='submit' name='action' value='Deconnexion'>
-        </form>
+               </p>
+            <button class="btn btn-primary" onclick="window.location='AjoutCommande.jsp'">Ajouter une commande</button>
+            </script>
+
+            <script id="selectTemplate" type="text/template">
+                {{! Pour chaque état dans le tableau}}
+                {{#records}}
+                {{! Une option dans le select }}
+                {{! le point représente la valeur courante du tableau }}
+                <OPTION VALUE="{{.}}">{{.}}</OPTION>
+                {{/records}}
+            </script>
+
+            <form action="<c:url value="/"/>" method="POST"> 
+                            <input class="btn btn-secondary" type='submit' name='action' value='Deconnexion'>
+            </form>
+        </div>
             
     </body>
 </html>
