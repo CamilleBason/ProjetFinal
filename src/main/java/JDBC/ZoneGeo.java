@@ -1,0 +1,35 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package JDBC;
+
+/**
+ *
+ * @author crouvera
+ */
+public class ZoneGeo {
+    private String ville;
+
+
+	
+	//private String formattedRate;
+
+	public ZoneGeo(String ville) {
+		this.ville = ville;
+		
+		//this.formattedRate = String.format("%05.2f %%", rate);
+	}
+
+
+	
+	public String getVille() {
+		return ville;
+	}
+
+
+}
+
+
+
