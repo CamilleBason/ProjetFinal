@@ -21,8 +21,7 @@ function addCode() {
         success: // La fonction qui traite les résultats
                 function (result) {
                     //showCodes();
-                    console.log(result);
-                    
+                    console.log(result);  
                 },
         error: showError
     });

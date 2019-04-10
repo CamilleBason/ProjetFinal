@@ -72,7 +72,7 @@ function addCode() {
                 </script>
                 <form>
                     <label for="ID">ID du Produit :</label>
-                    <select id="ID"></select>
+                    <select id="ID" name="ID"></select>
                 </form>
 
                 Quantité : <input id="quantite" name="quantite" type="number" required><br/>
@@ -90,7 +90,7 @@ function addCode() {
                 </script>
                 <form>
                     <label for="Transport">Société de transport :</label>
-                    <select id="Transport"></select>
+                    <select id="Transport" name="Transport"></select>
                 </form>
                 <input type="submit" id="Ajouter" value="Ajouter" onclick="addCode()">
 
