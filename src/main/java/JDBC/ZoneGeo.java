@@ -11,14 +11,14 @@ package JDBC;
  */
 public class ZoneGeo {
     private String ville;
-
+    private float achat;
 
 	
 	//private String formattedRate;
 
-	public ZoneGeo(String ville) {
+	public ZoneGeo(String ville, float achat) {
 		this.ville = ville;
-		
+		this.achat = achat;
 		//this.formattedRate = String.format("%05.2f %%", rate);
 	}
 
@@ -26,6 +26,10 @@ public class ZoneGeo {
 	
 	public String getVille() {
 		return ville;
+	}
+
+public float getAchat() {
+		return achat;
 	}
 
 

@@ -93,8 +93,8 @@
                              
                                 var data = google.visualization.arrayToDataTable([
                                 
-                                    ['Graphique CA', result.records[0].discountCode, result.records[1].discountCode, result.records[2].discountCode,result.records[3].discountCode,result.records[4].discountCode],
-                                    ['2014', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate]
+                                    ['Graphique CA', result.records[0].ville, result.records[1].ville, result.records[2].ville,result.records[3].ville,result.records[4].ville],
+                                    ['2014', result.records[0].achat, result.records[1].achat, result.records[2].achat,result.records[3].achat,result.records[4].achat]
                                     //['2015', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
                                     //['2016', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
                                     //['2017', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate]
