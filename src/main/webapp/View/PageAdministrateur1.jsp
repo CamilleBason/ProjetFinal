@@ -1,4 +1,4 @@
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
     Document   : PageAdministrateur
     Created on : 26 mars 2019, 14:37:09
@@ -89,14 +89,14 @@
                                 // On affiche la liste des options dans le select
                                 $('#codes').html(processedTemplate);
 
-                             
+
                                 var data = google.visualization.arrayToDataTable([
-                                
-                                    ['Graphique CA', result.records[0].discountCode, result.records[1].discountCode, result.records[2].discountCode,result.records[3].discountCode,result.records[4].discountCode],
-                                    ['2014', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate]
-                                    //['2015', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
-                                    //['2016', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
-                                    //['2017', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate]
+
+                                    ['Graphique CA', result.records[0].discountCode, result.records[1].discountCode, result.records[2].discountCode, result.records[3].discountCode, result.records[4].discountCode],
+                                    ['2014', result.records[0].rate, result.records[1].rate, result.records[2].rate, result.records[3].rate, result.records[4].rate]
+                                            //['2015', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
+                                            //['2016', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
+                                            //['2017', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate]
 
                                 ]);
                                 console.log(result.records[0].discountCode);
@@ -124,7 +124,7 @@
     <body>
 
         <!-- On montre le formulaire de saisie -->
-        <button class="ajouter" onclick="window.location='PageChoixGraphique.jsp'">Retour à la page d'acceuil adminsitrateur</button>
+        <button class="Retour" onclick=" window.location = '../PageChoixGraphique.jsp'">Retour à la page d'acceuil adminsitrateur</button>
         <h1>Graphique des CA par catégorie d'article</h1>
 
          <!-- La zone où les résultats vont s'afficher -->
@@ -137,22 +137,22 @@
             <TABLE>
             <tr><th>Pèriode</th></tr>
             {{! Pour chaque enregistrement }}
-         {{#records}}
-            {{! Une ligne dans la table }}
-                 Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
-            <TR><TD>Date de début</TD><TD><button onclick="deleteCode('{{discountCode}}')">Entrer</button></TD></TR>
-             <TR><TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Entrer</button></TD></TR>
-             <!--<TR><TD>Date de début</TD><TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Supprimer</button></TD></TR>
-                            {{/records}}
+            {{#records}}
+        {{! Une ligne dans la table }}
+        Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
+                <TR><TD>Date de début</TD><TD><button onclick="deleteCode('{{discountCode}}')">Entrer</button></TD></TR>
+        <TR>        <TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Entrer</button></TD></TR>
+        <!--<TR>        <TD>Date de début</TD><TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Supprimer</button></TD></TR>
+        {{/records}}        
             </TABLE>
         </script>    
         <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-        
-        <form action="<c:url value='/'/>" method="POST"> 
-			<input type='submit' name='action' value='Deconnexion'>
-        </form>
 
-    </body>
+        <form action="<c:url value='/'/>" method="POST"> 
+        <input type='submit' name='action' value='Deconnexion'>
+    </form>
+
+</body>
 
 
 </html>
