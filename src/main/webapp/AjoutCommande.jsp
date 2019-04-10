@@ -59,7 +59,7 @@ function addCode() {
         <h2>Edition d'un bon de commande</h2>
         <form id="codeForm" onsubmit="event.preventDefault();">
             <fieldset><legend>Saisie d'un bon de commande</legend>
-                Numéro du bon de commande : <input id="code" name="code" type="number" required><br/>
+                Numéro du bon de commande : <input id="code" name="code" type="number" min="0" required><br/>
                 <!--Taux: <input id="taux" name="taux" value="1" readonly="readonly" required><br/>-->
                 Client ID : <input id="taux" name="taux" value="${userID}" readonly="readonly" required><br/>
 
@@ -76,8 +76,8 @@ function addCode() {
                     <select id="ID" name="ID"></select>
                 </form>
 
-                Quantité : <input id="quantite" name="quantite" type="number" required><br/>
-                Frais de port : <input id="fraisP" name="fraisP" type="number"  required><br/>
+                Quantité : <input id="quantite" name="quantite" type="number"  min="0" required><br/>
+                Frais de port : <input id="fraisP" name="fraisP" type="number" min="0" required><br/>
                 Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
                 Date d'expédition : <input id="dateE" name="dateExp" type="date" required><br/>
                 

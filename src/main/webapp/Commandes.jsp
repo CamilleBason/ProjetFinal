@@ -13,8 +13,7 @@
         <link rel="shortcut icon" type="image/x-icon" href="Image/commande.ico">
         <title>Commandes Client</title>
         <!-- On charge jQuery -->
-        
-         <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <!-- On charge le moteur de template mustache https://mustache.github.io/ -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
         <script src="./js/commandes.js"></script>
@@ -158,7 +157,7 @@
                     <TD>{{salesDate}}</TD>
                     <TD>{{shippingDate}}</TD>
                     <TD><button class="btn btn-danger" onclick="deleteCode('{{orderNum}}')">Supprimer</button></TD>
-                    <TD><button class="btn btn-info" onclick="deleteCode('{{orderNum}}')">Modifier</button>
+                    <TD><button class="btn btn-info" onclick="window.location='modifierCommande.jsp'">Modifier</button>
                     </TD>
                 </TR>
                 </tbody>

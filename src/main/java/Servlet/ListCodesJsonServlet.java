@@ -18,6 +18,7 @@ import java.util.Properties;
 
 import JDBC.DAO;
 import JDBC.DataSourceFactory;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,13 +36,24 @@ public class ListCodesJsonServlet extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
+String numC = request.getParameter("code");
+            String IDclient = request.getParameter("taux");
+            String prodid = request.getParameter("prodid");
+            String quantite = request.getParameter("quantite");
+            String fraisPort = request.getParameter("fraisP");
+            String dateVente = request.getParameter("dateVente");
+            String dateExp = request.getParameter("dateExp");
+            String transport = request.getParameter("transport");
 
 		// Créér le DAO avec sa source de données
 		DAO dao = new DAO(DataSourceFactory.getDataSource());
 
 		Properties resultat = new Properties();
 		try {
-			resultat.put("records", dao.allCodes());
+			resultat.put("records", dao.allCodes());        
+                    HttpSession session = request.getSession(true); // démarre la session
+                    session.setAttribute("code", resultat.getProperty("code"));
+
 		} catch (SQLException ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			resultat.put("records", Collections.EMPTY_LIST);
