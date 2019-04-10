@@ -93,8 +93,8 @@
                              
                                 var data = google.visualization.arrayToDataTable([
                                 
-                                    ['Graphique CA', result.records[0].ville, result.records[1].ville, result.records[2].ville,result.records[3].ville,result.records[4].ville],
-                                    ['2014', result.records[0].achat, result.records[1].achat, result.records[2].achat,result.records[3].achat,result.records[4].achat]
+                                    ['Graphique CA', result.records[0].ville, result.records[1].ville, result.records[2].ville,result.records[3].ville,result.records[4].ville,result.records[5].ville,result.records[6].ville,result.records[7].ville,result.records[8].ville,result.records[9].ville],
+                                    ['villes', result.records[0].achat, result.records[1].achat, result.records[2].achat,result.records[3].achat,result.records[4].achat,result.records[5].achat,result.records[6].achat,result.records[7].achat,result.records[8].achat,result.records[9].achat]
                                     //['2015', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
                                     //['2016', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
                                     //['2017', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate]
@@ -126,7 +126,7 @@
 
         <!-- On montre le formulaire de saisie -->
         <button class="Retour" onclick=" window.location = '../PageChoixGraphique.jsp'">Retour à la page d'acceuil adminsitrateur</button>
-        <h1>Graphique des CA par catégorie d'article</h1>
+        <h1>Graphique des CA par zone geographique</h1>
 
          <!-- La zone où les résultats vont s'afficher -->
         <div id="codes"></div>
