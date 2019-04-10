@@ -23,7 +23,7 @@
 <script>
             $(document).ready(// Exécuté à la fin du chargement de la page
                     function () {
-                        // On montre la liste des codes
+                        // On montre la liste des commandes
                         showCodes();
                     }
             );
@@ -31,8 +31,10 @@
             function showCodes() {
                         // On fait un appel AJAX pour chercher les codes
                         $.ajax({
+                            //on charge la servlet ListCodesJsonServlet
                             url: "allCodes",
                             dataType: "json",
+                            //on affiche le type d'erreur si il y a une erreur
                             error: showError,
                             success: // La fonction qui traite les résultats
                                     function (result) {
@@ -49,22 +51,23 @@
                                         document.getElementById("codes").style.display = "block";
                                         
                                         //affiche seulement les bons de commandes du client connecté, les autres sont cachés
-                                        //console.log("userID : " + userID);
+                                        
                                         for (var i = 1; i < arrayLignes.length; i++) {
-                                                //console.log("cc");
+                                                
                                                 let clientIDstr = arrayLignes[i].cells[1].innerHTML;
                                                 let clientID = parseInt(clientIDstr);
-                                                //console.log(clientID);
-                                                //console.log(clientID === userID);
+                                                
                                                 if (clientID === userID) {
+                                                    //on affiche seulement les commandes de l'utilisateur connecté
                                                         arrayLignes[i].style.visibility = "visible";
-                                                        //arrayLignes[i].style.display = "block";
+                                                        
                                                 } else {
+                                                    //sinon on les cache
                                                         arrayLignes[i].style.visibility = "hidden";
                                                         arrayLignes[i].style.display = "none";
                                                 }
                                         }
-                                        
+                                        /*
                                         document.getElementById("Modifier").disabled = true;
                                 
                                         //double click modifier
@@ -85,33 +88,16 @@
                                         
                                         $("#ToutEffacer").click(function(event) {
                                             toutEffacer();
-                                        });
+                                        });*/
                                     }
                         });
                      
                     }
 
-            // Ajouter un code
-            /*
-            function addCode() {
-                $.ajax({
-                    url: "addCode",
-                    // serialize() renvoie tous les paramètres saisis dans le formulaire
-                    data: $("#codeForm").serialize(),
-                    dataType: "json",
-                    success: // La fonction qui traite les résultats
-                            function (result) {
-                                showCodes();
-                                console.log(result);
-                            },
-                    error: showError
-                });
-                return false;
-            }*/
-
             // Supprimer un code
             function deleteCode(code) {
                 $.ajax({
+                    // utilise la servlet DeleteCodeJsonServlet 
                     url: "deleteCode",
                     data: {"code": code},
                     dataType: "json",
@@ -133,14 +119,14 @@
         </script>    </head>
     <body>
         <div class="container">
+            <!-- Afficher le nom de l'utlisateur -->
             <h1 class="text-primary">Bienvenue <span id="userName">${userName}</span></h1>
 
             <input id="userID" type="hidden" name="userName" value="${userID}">
-            <!-- La zone d'erreur -->
-            <div id="erreur"></div>
+             
 
             <h2>Vos bons de commande : </h2>
-            <!-- La zone où les résultats vont s'afficher -->
+             <!--La zone où les résultats vont s'afficher -->
             <div id="codes"></div>
 
             <!-- Le template qui sert à formatter la liste des codes -->
@@ -184,16 +170,17 @@
                </p>
             <button class="btn btn-primary" onclick="window.location='AjoutCommande.jsp'">Ajouter une commande</button>
             </script>
-
-            <script id="selectTemplate" type="text/template">
+            
+          <!--  <script id="selectTemplate" type="text/template">
                 {{! Pour chaque état dans le tableau}}
                 {{#records}}
                 {{! Une option dans le select }}
                 {{! le point représente la valeur courante du tableau }}
                 <OPTION VALUE="{{.}}">{{.}}</OPTION>
                 {{/records}}
-            </script>
-
+            </script> 
+-->
+<!-- Bouton de déconnexion -->
             <form action="<c:url value="/"/>" method="POST"> 
                             <input class="btn btn-secondary" type='submit' name='action' value='Deconnexion'>
             </form>

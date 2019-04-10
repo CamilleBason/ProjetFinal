@@ -132,28 +132,24 @@
         <div id="codes"></div>
 
         <!-- Le template qui sert à formatter la liste des codes -->
-        <script id="codesTemplate" type="text/template">
-
-
-            <TABLE>
-            <tr><th>Pèriode</th></tr>
-            {{! Pour chaque enregistrement }}
-         {{#records}}
-            {{! Une ligne dans la table }}
-                 Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
-            <TR><TD>Date de début</TD><TD><button onclick="deleteCode('{{discountCode}}')">Entrer</button></TD></TR>
-             <TR><TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Entrer</button></TD></TR>
-             <!--<TR><TD>Date de début</TD><TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Supprimer</button></TD></TR>
-                            {{/records}}
-            </TABLE>
-        </script>    
+        
+        <form id="dateForm" onsubmit="event.preventDefault();">
+        <fieldset><legend>Saisisez vos dates</legend>
+        Date de début d'étude : <input id="dateD" name="dateD" type="date" required><br/>
+        Date de fin d'étude : <input id="dateF" name="dateF" type="date" required><br/>
+        
+        <input type="submit" id="Valider" value="Valider" onclick="">
+        </fieldset>
+        </form>
+            
+           
         <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
         
         <form action="<c:url value='/'/>" method="POST"> 
-			<input type='submit' name='action' value='Deconnexion'>
-        </form>
+                    <input type='submit' name='action' value='Deconnexion'>
+                </form>
 
-    </body>
+        </body>
 
 
-</html>
+    </html>

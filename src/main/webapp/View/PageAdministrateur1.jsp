@@ -130,9 +130,8 @@
          <!-- La zone où les résultats vont s'afficher -->
         <div id="codes"></div>
 
-        <!-- Le template qui sert à formatter la liste des codes -->
+        <!-- Le template qui sert à formatter la liste des codes 
         <script id="codesTemplate" type="text/template">
-
 
             <TABLE>
             <tr><th>Pèriode</th></tr>
@@ -145,7 +144,17 @@
         <!--<TR>        <TD>Date de début</TD><TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Supprimer</button></TD></TR>
         {{/records}}        
             </TABLE>
-        </script>    
+        </script>   -->
+        
+        <form id="dateForm" onsubmit="event.preventDefault();">
+        <fieldset><legend>Saisisez vos dates</legend>
+        Date de début d'étude : <input id="dateD" name="dateD" type="date" required><br/>
+        Date de fin d'étude : <input id="dateF" name="dateF" type="date" required><br/>
+        
+        <input type="submit" id="Valider" value="Valider" onclick="">
+        </fieldset>
+        </form>
+        
         <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
 
         <form action="<c:url value='/'/>" method="POST"> 

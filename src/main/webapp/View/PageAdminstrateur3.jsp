@@ -13,5 +13,13 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <form id="dateForm" onsubmit="event.preventDefault();">
+        <fieldset><legend>Saisisez vos dates</legend>
+        Date de début d'étude : <input id="dateD" name="dateD" type="date" required><br/>
+        Date de fin d'étude : <input id="dateF" name="dateF" type="date" required><br/>
+        
+        <input type="submit" id="Valider" value="Valider" onclick="">
+        </fieldset>
+        </form>
     </body>
 </html>
