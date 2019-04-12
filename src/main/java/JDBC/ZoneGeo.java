@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package JDBC;
-
+//classe pour afficher les CA par villes
 /**
  *
  * @author crouvera

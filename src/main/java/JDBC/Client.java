@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package JDBC;
-
+//Création du client pour afficher le graphique des CA par Client
 /**
  *
  * @author crouvera
@@ -12,18 +12,12 @@ package JDBC;
 public class Client {
     
    private String client;
-    private float prix;
-
-
-	
-	//private String formattedRate;
+   private float prix;
 
 	public Client(String client, float prix) {
 		this.client = client;
 		this.prix = prix;
-            
-            
-		//this.formattedRate = String.format("%05.2f %%", rate);
+	
 	}
 
 	public String getClient() {

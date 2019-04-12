@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package controller;
-
+//servlet pour afficher graphique par categorie d'article
 import JDBC.DAO;
 import JDBC.DataSourceFactory;
 import com.google.gson.Gson;
@@ -35,6 +35,7 @@ public class ListDiscountCodesServlet extends HttpServlet {
 
 		Properties resultat = new Properties();
 		try {
+                    //fonction allDiscountCodes du DAO pour CA par categorie 
 			resultat.put("records", dao.allDiscountCodes());
                         //resultat.put("records", dao.allCodes());
 		} catch (SQLException ex) {

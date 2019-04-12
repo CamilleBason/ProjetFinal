@@ -10,7 +10,7 @@ package controller;
  * @author crouvera
  */
 
-
+//Servlet pour afficher le graphique CA par zone geographique
 import JDBC.DAO;
 import JDBC.DataSourceFactory;
 import com.google.gson.Gson;
@@ -41,6 +41,7 @@ public class ZoneGeographique extends HttpServlet {
 
 		Properties resultat = new Properties();
 		try {
+                    //on appelle la fonction Zone geographique du DAO 
 			resultat.put("records", dao.ZoneGeographique());
                         //resultat.put("records", dao.allCodes());
 		}

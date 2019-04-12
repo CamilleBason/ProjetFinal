@@ -9,7 +9,7 @@ package controller;
  *
  * @author crouvera
  */
-
+//Servlet pour Graphique des CA par Client 
 
 import JDBC.DAO;
 import JDBC.DataSourceFactory;
@@ -41,6 +41,7 @@ public class GraphiqueClient extends HttpServlet {
 
 		Properties resultat = new Properties();
 		try {
+                    //on appelle la fonction GraphiqueClient du DAO 
 			resultat.put("records", dao.GraphiqueClient());
                         //resultat.put("records", dao.allCodes());
 		}
