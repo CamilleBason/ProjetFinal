@@ -103,6 +103,7 @@
                     success: 
                             function (result) {
                                 showCodes();
+                                alert("Votre bon de commande a été supprimé");
                                 console.log(result);
                             },
                     error: showError

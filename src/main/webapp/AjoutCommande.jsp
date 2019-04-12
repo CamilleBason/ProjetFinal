@@ -26,7 +26,7 @@
         <script src="./js/ajoutCommande.js"></script> 
         <link rel="stylesheet" href="./css/ajoutCommande.css"> 
         <script>
-            $(document).ready(// Exécuté à la fin du chargement de la page
+            $(document).ready(// Exécuté à la fin du chargement de la page, met les ID et les entreprises de transport dans le menu déroullant
                     function () {
                         fillIDSelector();
                         fillTransportSelector();
@@ -36,14 +36,17 @@
 // Ajouter un code
             function addCode() {
                 $.ajax({
+                    //on charge la servlet AddCodeJsonServlet
                     url: "addCode",
                     // serialize() renvoie tous les paramètres saisis dans le formulaire
                     data: $("#codeForm").serialize(),
                     dataType: "json",
                     success: // La fonction qui traite les résultats
                             function (result) {
-                                //showCodes();
+                                
                                 console.log(result);
+                                var mes = document.getElementById("messageAjout");
+                                mes.innerHTML = result.message;
                             },
                     error: showError
                 });
