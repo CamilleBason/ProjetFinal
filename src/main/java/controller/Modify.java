@@ -22,9 +22,11 @@ import JDBC.DAO;
 import JDBC.DAOException;
 import JDBC.DataSourceFactory;
 import controller.LoginController;
+import static java.lang.System.console;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -51,6 +53,8 @@ public class Modify extends HttpServlet {
             String id = request.getParameter("id");
             
             request.setAttribute( "id", id );
+            System.out.println(request);
+            System.out.println("id = "+id);
             
             ServletContext sc = this.getServletContext();
             RequestDispatcher rd = sc.getRequestDispatcher("/modifierCommande.jsp");

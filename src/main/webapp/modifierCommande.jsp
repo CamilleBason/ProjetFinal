@@ -16,7 +16,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <!-- On charge le moteur de template mustache https://mustache.github.io/ -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
-        <script src="./js/commandes.js"></script>
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="./css/modifierCommande.css">
 
@@ -31,7 +31,7 @@
 // Ajouter un code
             function modifier() {
                 $.ajax({
-                    url: "addCode",
+                    url: "/Modify",
                     // serialize() renvoie tous les paramètres saisis dans le formulaire
                     data: $("#codeForm").serialize(),
                     dataType: "json",

@@ -23,7 +23,7 @@
         <!-- On charge le moteur de template mustache https://mustache.github.io/ -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
 
-        <script src="./js/ajoutCommande.js"></script> 
+        
         <link rel="stylesheet" href="./css/ajoutCommande.css"> 
         <script>
             $(document).ready(// Exécuté à la fin du chargement de la page
