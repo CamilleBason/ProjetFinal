@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Edition des taux de remise (AJAX)</title>
+        <title>Graphique CA</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- On charge jQuery -->
         <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -21,62 +21,13 @@
             google.charts.load('current', {'packages': ['corechart', 'bar']});
             google.charts.setOnLoadCallback(drawChart);
 
-
-
-            $(document).ready(// Exécuté à la fin du chargement de la page
-                    function () {
-                        // On montre la liste des codes
-                        showCodes();
-                    }
-            );
-
-            function showCodes() {
-                // On fait un appel AJAX pour chercher les codes
-
-            }
-
-            // Ajouter un code
-            function addCode() {
-                $.ajax({
-                    url: "addCode",
-                    // serialize() renvoie tous les paramètres saisis dans le formulaire
-                    data: $("#codeForm").serialize(),
-                    dataType: "json",
-                    success: // La fonction qui traite les résultats
-                            function (result) {
-                                showCodes();
-                                console.log(result);
-                            },
-                    error: showError
-                });
-                return false;
-            }
-
-            // Supprimer un code
-            function deleteCode(code) {
-                $.ajax({
-                    url: "deleteCode",
-                    data: {"code": code},
-                    dataType: "json",
-                    success:
-                            function (result) {
-                                showCodes();
-                                console.log(result);
-                            },
-                    error: showError
-                });
-                return false;
-            }
-
-            // Fonction qui traite les erreurs de la requête
-            function showError(xhr, status, message) {
+           function showError(xhr, status, message) {
                 alert(JSON.parse(xhr.responseText).message);
             }
 
-
-
             function drawChart(result) {
                 $.ajax({
+                    //on indique l'url pour observer les données que nous avons demandés 
                     url: "http://localhost:8080/ProjetFinal/allDiscountCodes",
                     dataType: "json",
                     error: showError,
@@ -89,22 +40,20 @@
                                 // On affiche la liste des options dans le select
                                 $('#codes').html(processedTemplate);
 
-
+                                //J'ai utilisé la google Chart
                                 var data = google.visualization.arrayToDataTable([
-
-                                    ['Graphique CA', result.records[0].discountCode, result.records[1].discountCode, result.records[2].discountCode, result.records[3].discountCode, result.records[4].discountCode],
-                                    ['2014', result.records[0].rate, result.records[1].rate, result.records[2].rate, result.records[3].rate, result.records[4].rate]
-                                            //['2015', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
-                                            //['2016', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
-                                            //['2017', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate]
-
+                                    //J'ai créé le graphique
+                                    ['CA', result.records[0].discountCode, result.records[1].discountCode, result.records[2].discountCode, result.records[3].discountCode, result.records[4].discountCode],
+                                    [' ', result.records[0].rate, result.records[1].rate, result.records[2].rate, result.records[3].rate, result.records[4].rate]
+                                  
                                 ]);
                                 console.log(result.records[0].discountCode);
                                 console.log(result.records.length);
                                 var options = {
                                     chart: {
-                                        title: 'Company Performance',
-                                        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                                        //Les titres pour la description
+                                        title: 'Graphique CA',
+                                        subtitle: "Le chiffre d'affaire par categorie",
                                     }
                                 };
                                 console.log(result);
@@ -113,16 +62,12 @@
                             }
                 });
 
-
-
             }
 
         </script>
-        <!-- un CSS pour formatter la table -->
         <link rel="stylesheet" type="text/css" href="css/tableformat.css">
     </head>
     <body>
-
         <!-- On montre le formulaire de saisie -->
         <button class="Retour" onclick=" window.location = '../PageChoixGraphique.jsp'">Retour à la page d'acceuil adminsitrateur</button>
         <h1>Graphique des CA par catégorie d'article</h1>
@@ -130,22 +75,6 @@
          <!-- La zone où les résultats vont s'afficher -->
         <div id="codes"></div>
 
-        <!-- Le template qui sert à formatter la liste des codes 
-        <script id="codesTemplate" type="text/template">
-
-            <TABLE>
-            <tr><th>Pèriode</th></tr>
-            {{! Pour chaque enregistrement }}
-            {{#records}}
-        {{! Une ligne dans la table }}
-        Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
-                <TR><TD>Date de début</TD><TD><button onclick="deleteCode('{{discountCode}}')">Entrer</button></TD></TR>
-        <TR>        <TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Entrer</button></TD></TR>
-        <!--<TR>        <TD>Date de début</TD><TD>Date de fin</TD><TD><button onclick="deleteCode('{{discountCode}}')">Supprimer</button></TD></TR>
-        {{/records}}        
-            </TABLE>
-        </script>   -->
-        
         <form id="dateForm" onsubmit="event.preventDefault();">
         <fieldset><legend>Saisisez vos dates</legend>
         Date de début d'étude : <input id="dateD" name="dateD" type="date" required><br/>

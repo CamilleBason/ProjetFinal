@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Edition des taux de remise (AJAX)</title>
+        <title>Graphique CA</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- On charge jQuery -->
         <script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -22,52 +22,6 @@
             google.charts.load('current', {'packages': ['corechart', 'bar']});
             google.charts.setOnLoadCallback(drawChart);
 
-
-
-            $(document).ready(// Exécuté à la fin du chargement de la page
-                    function () {
-                        // On montre la liste des codes
-                        showCodes();
-                    }
-            );
-
-            function showCodes() {
-                // On fait un appel AJAX pour chercher les codes
-
-            }
-
-            // Ajouter un code
-            function addCode() {
-                $.ajax({
-                    url: "addCode",
-                    // serialize() renvoie tous les paramètres saisis dans le formulaire
-                    data: $("#codeForm").serialize(),
-                    dataType: "json",
-                    success: // La fonction qui traite les résultats
-                            function (result) {
-                                showCodes();
-                                console.log(result);
-                            },
-                    error: showError
-                });
-                return false;
-            }
-
-            // Supprimer un code
-            function deleteCode(code) {
-                $.ajax({
-                    url: "deleteCode",
-                    data: {"code": code},
-                    dataType: "json",
-                    success:
-                            function (result) {
-                                showCodes();
-                                console.log(result);
-                            },
-                    error: showError
-                });
-                return false;
-            }
 
             // Fonction qui traite les erreurs de la requête
             function showError(xhr, status, message) {
@@ -93,12 +47,9 @@
                              
                                 var data = google.visualization.arrayToDataTable([
                                 
-                                    ['Graphique CA', result.records[0].ville, result.records[1].ville, result.records[2].ville,result.records[3].ville,result.records[4].ville,result.records[5].ville,result.records[6].ville,result.records[7].ville,result.records[8].ville,result.records[9].ville],
-                                    ['villes', result.records[0].achat, result.records[1].achat, result.records[2].achat,result.records[3].achat,result.records[4].achat,result.records[5].achat,result.records[6].achat,result.records[7].achat,result.records[8].achat,result.records[9].achat]
-                                    //['2015', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
-                                    //['2016', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate],
-                                    //['2017', result.records[0].rate, result.records[1].rate, result.records[2].rate,result.records[3].rate,result.records[4].rate]
-
+                                    ['CA', result.records[0].ville, result.records[1].ville, result.records[2].ville,result.records[3].ville,result.records[4].ville,result.records[5].ville,result.records[6].ville,result.records[7].ville,result.records[8].ville,result.records[9].ville],
+                                    [' ', result.records[0].achat, result.records[1].achat, result.records[2].achat,result.records[3].achat,result.records[4].achat,result.records[5].achat,result.records[6].achat,result.records[7].achat,result.records[8].achat,result.records[9].achat]
+                                   
                                 ]);
                                 console.log(result.records[0].discountCode);
                                 console.log(result.records.length);

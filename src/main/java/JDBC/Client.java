@@ -11,21 +11,22 @@ package JDBC;
  */
 public class Client {
     
-   private int client;
+   private String client;
     private float prix;
+
 
 	
 	//private String formattedRate;
 
-	public Client(int client, float prix) {
+	public Client(String client, float prix) {
 		this.client = client;
 		this.prix = prix;
+            
+            
 		//this.formattedRate = String.format("%05.2f %%", rate);
 	}
 
-
-	
-	public int getClient() {
+	public String getClient() {
 		return client;
 	}
 

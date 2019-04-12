@@ -207,26 +207,28 @@ public class DAO {
 		}
 		return result;
 	}
-               public List<Client> GraphClient() throws SQLException {
       
-      List<Client> result = new LinkedList<>();
-      
-      //String sql ="SELECT CUSTOMER.CITY AS H, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) INNER JOIN CUSTOMER USING(CUSTOMER_ID) GROUP BY CUSTOMER.CITY" ;
-      String sql ="SELECT PURCHASE_ORDER.CUSTOMER_ID AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J1 FROM PURCHASE_ORDER INNER JOIN PRODUCT USING(PRODUCT_ID) GROUP BY PURCHASE_ORDER.CUSTOMER_ID";
-      //"SELECT PRODUCT_ID, SUM(QUANTITY) AS ARBRE FROM PURCHASE_ORDER GROUP BY PRODUCT_ID ";//GROUP BY PRODUCT_ID";
-      // "SELECT PRODUCT_ID, (PURCHASE_ORDER.QUANTITY * PRODUCT.PURCHASE_COST) FROM PURCHASE_ORDER INNER JOIN PRODUCT USING(PRODUCT_ID) GROUP BY PRODUCT_ID";
-      try (Connection connection = myDataSource.getConnection();
-      PreparedStatement stmt = connection.prepareStatement(sql)) {
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-     int client = rs.getInt("H1");
-      float prix = rs.getFloat("J1");
-      Client c2 = new Client(client, prix);
-      result.add(c2);
-      }
-      }
-      return result;
-      }
+     public List<Client> GraphiqueClient() throws SQLException {
+
+        List<Client> result = new LinkedList<>();
+
+        //String sql ="SELECT CUSTOMER.CITY AS H, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) INNER JOIN CUSTOMER USING(CUSTOMER_ID) GROUP BY CUSTOMER.CITY" ;
+        //String sql = "SELECT PURCHASE_ORDER.CUSTOMER_ID AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J1 FROM PURCHASE_ORDER INNER JOIN PRODUCT USING(PRODUCT_ID) GROUP BY PURCHASE_ORDER.CUSTOMER_ID";
+String sql = "SELECT CUSTOMER.NAME AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J1 FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) INNER JOIN CUSTOMER USING(CUSTOMER_ID) GROUP BY CUSTOMER.NAME";        
+//"SELECT PRODUCT_ID, SUM(QUANTITY) AS ARBRE FROM PURCHASE_ORDER GROUP BY PRODUCT_ID ";//GROUP BY PRODUCT_ID";
+        // "SELECT PRODUCT_ID, (PURCHASE_ORDER.QUANTITY * PRODUCT.PURCHASE_COST) FROM PURCHASE_ORDER INNER JOIN PRODUCT USING(PRODUCT_ID) GROUP BY PRODUCT_ID";
+        try (Connection connection = myDataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String client = rs.getString("H1");            
+                float prix = rs.getFloat("J1");
+                Client c2 = new Client(client, prix);
+                result.add(c2);
+            }
+        }
+        return result;
+    }
 
 
     public int addDiscountCode(int numC, int IDclient, int selectTemplate, int quantite, float fraisPort, Date dateVente, Date dateExp, String selectTemplate2) throws SQLException {
