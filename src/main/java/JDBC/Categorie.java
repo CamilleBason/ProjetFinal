@@ -9,7 +9,7 @@ package JDBC;
  *
  * @author crouvera
  */
-public class DiscountCode {
+public class Categorie {
   
 
 	private String discountCode;
@@ -18,7 +18,7 @@ public class DiscountCode {
 	
 	//private String formattedRate;
 
-	public DiscountCode(String code, float rate) {
+	public Categorie(String code, float rate) {
 		this.discountCode = code;
 		this.rate = rate;
 		//this.formattedRate = String.format("%05.2f %%", rate);
