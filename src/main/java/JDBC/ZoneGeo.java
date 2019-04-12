@@ -19,7 +19,7 @@ public class ZoneGeo {
 	public ZoneGeo(String ville, float achat) {
 		this.ville = ville;
 		this.achat = achat;
-		//this.formattedRate = String.format("%05.2f %%", rate);
+		
 	}
 
 

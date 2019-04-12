@@ -147,11 +147,11 @@ public class DAO {
         }
         return result;
     }
-    //Fonction pour afficher 
+    //Fonction pour afficher le premier graphique
     public List<Categorie> CategorieCA() throws SQLException {
 
 		List<Categorie> result = new LinkedList<>();
-
+                //la requête sql j'ai demandé le CA groupé par categorie 
 		String sql ="SELECT PRODUCT_CODE.DESCRIPTION AS SA, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS CA FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID)INNER JOIN PRODUCT_CODE ON PRODUCT.PRODUCT_CODE=PRODUCT_CODE.PROD_CODE GROUP BY PRODUCT_CODE.DESCRIPTION";
 
 		try (Connection connection = myDataSource.getConnection(); 
@@ -166,10 +166,11 @@ public class DAO {
 		}
 		return result;
 	}
+    //Fonction pour le deuxième Graphique 
       public List<ZoneGeo> ZoneGeographique() throws SQLException {
 
 		List<ZoneGeo> result = new LinkedList<>();
-
+                //requete sql : j'ai demandé le CA groupé par ville 
 		String sql ="SELECT CUSTOMER.CITY AS H, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) INNER JOIN CUSTOMER USING(CUSTOMER_ID) GROUP BY CUSTOMER.CITY" ;
 
 		try (Connection connection = myDataSource.getConnection(); 
@@ -184,12 +185,12 @@ public class DAO {
 		}
 		return result;
 	}
-      
+      //Pour afficher le troisième graphique 
      public List<Client> GraphiqueClient() throws SQLException {
 
         List<Client> result = new LinkedList<>();
 
-
+//requete sql : j'ai deméndé le CA groupé par client 
 String sql = "SELECT CUSTOMER.NAME AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J1 FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) INNER JOIN CUSTOMER USING(CUSTOMER_ID) GROUP BY CUSTOMER.NAME";        
 
         try (Connection connection = myDataSource.getConnection();

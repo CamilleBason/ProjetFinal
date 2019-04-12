@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package JDBC;
-
+//Categorie pour le premier graphique
 /**
  *
  * @author crouvera
@@ -16,14 +16,12 @@ public class Categorie {
 
 	private float rate;
 	
-	//private String formattedRate;
+
 
 	public Categorie(String code, float rate) {
 		this.discountCode = code;
-		this.rate = rate;
-		//this.formattedRate = String.format("%05.2f %%", rate);
+		this.rate = rate;	
 	}
-
 
 	public String getDiscountCode() {
 		return discountCode;
@@ -33,9 +31,7 @@ public class Categorie {
 		return rate;
 	}
 	
-	//public String getFormatedRate() {
-	//	return formattedRate;
-	//}
+	
 
 }
 

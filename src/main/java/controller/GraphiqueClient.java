@@ -43,7 +43,7 @@ public class GraphiqueClient extends HttpServlet {
 		try {
                     //on appelle la fonction GraphiqueClient du DAO 
 			resultat.put("records", dao.GraphiqueClient());
-                        //resultat.put("records", dao.allCodes());
+                      
 		}
                 catch (SQLException ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

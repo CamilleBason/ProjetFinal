@@ -20,6 +20,7 @@
 
 
         <script>
+            //j'ai utilisée googleChart
             google.charts.load('current', {'packages': ['corechart', 'bar']});
             google.charts.setOnLoadCallback(drawChart);
         

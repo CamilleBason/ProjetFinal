@@ -20,9 +20,11 @@
 
 
         <script>
+            // j'ai utilisée googleChart
             google.charts.load('current', {'packages': ['corechart', 'bar']});
             google.charts.setOnLoadCallback(drawChart);
 
+            // Fonction qui traite les erreurs de la requête
            function showError(xhr, status, message) {
                 alert(JSON.parse(xhr.responseText).message);
             }
@@ -30,7 +32,7 @@
             function drawChart(result) {
                 $.ajax({
                     //on indique l'url pour observer les données que nous avons demandés 
-                    url: "http://localhost:8080/ProjetFinal/allDiscountCodes",
+                    url: "http://localhost:8080/ProjetFinal/CategorieCA",
                     dataType: "json",
                     error: showError,
                     success: // La fonction qui traite les résultats
@@ -44,7 +46,7 @@
 
                                 //J'ai utilisé la google Chart
                                 var data = google.visualization.arrayToDataTable([
-                                    //J'ai créé le graphique
+                                    //J'ai créé le graphique, les colonnes
                                     ['CA', result.records[0].discountCode, result.records[1].discountCode, result.records[2].discountCode, result.records[3].discountCode, result.records[4].discountCode],
                                     [' ', result.records[0].rate, result.records[1].rate, result.records[2].rate, result.records[3].rate, result.records[4].rate]
                                   
@@ -87,7 +89,7 @@
         </form>
         
         <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-
+        <!--bouton deconnexion-->
         <form action="<c:url value='/'/>" method="POST"> 
         <input type='submit' name='action' value='Deconnexion'>
     </form>

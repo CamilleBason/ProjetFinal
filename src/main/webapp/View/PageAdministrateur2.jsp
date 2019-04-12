@@ -21,6 +21,7 @@
 
 
         <script>
+            //j'ai utilisée googleChart 
             google.charts.load('current', {'packages': ['corechart', 'bar']});
             google.charts.setOnLoadCallback(drawChart);
 
@@ -49,7 +50,7 @@
 
                               //J'ai utilisé la google Chart
                                 var data = google.visualization.arrayToDataTable([
-                                //Les colones
+                                //Les colonnes du graphique avec les données 
                                     ['CA', result.records[0].ville, result.records[1].ville, result.records[2].ville,result.records[3].ville,result.records[4].ville,result.records[5].ville,result.records[6].ville,result.records[7].ville,result.records[8].ville,result.records[9].ville],
                                     [' ', result.records[0].achat, result.records[1].achat, result.records[2].achat,result.records[3].achat,result.records[4].achat,result.records[5].achat,result.records[6].achat,result.records[7].achat,result.records[8].achat,result.records[9].achat]
                                    

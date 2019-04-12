@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author crouvera
  */
-@WebServlet(name = "ListDiscountCodesServlet", urlPatterns = {"/allDiscountCodes"})
+@WebServlet(name = "ListCategorieServlet", urlPatterns = {"/CategorieCA"})
 public class ListCategorieServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -35,7 +35,7 @@ public class ListCategorieServlet extends HttpServlet {
 
 		Properties resultat = new Properties();
 		try {
-                    //fonction allDiscountCodes du DAO pour CA par categorie 
+                    //fonction CategorieCA du DAO pour CA par categorie 
 			resultat.put("records", dao.CategorieCA());
                         //resultat.put("records", dao.allCodes());
 		} catch (SQLException ex) {

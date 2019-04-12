@@ -43,7 +43,7 @@ public class ZoneGeographique extends HttpServlet {
 		try {
                     //on appelle la fonction Zone geographique du DAO 
 			resultat.put("records", dao.ZoneGeographique());
-                        //resultat.put("records", dao.allCodes());
+                      
 		}
                 catch (SQLException ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
