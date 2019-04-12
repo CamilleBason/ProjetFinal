@@ -50,7 +50,7 @@
                                     [' ', result.records[0].prix, result.records[1].prix, result.records[2].prix, result.records[3].prix,result.records[4].client,result.records[5].client,result.records[6].client,result.records[7].client,result.records[8].client,result.records[9].client,result.records[10].client,result.records[11].client]
                                        
                                 ]);
-                                console.log(result.records[0].discountCode);
+                                
                                 console.log(result.records.length);
                                 var options = {
                                     chart: {

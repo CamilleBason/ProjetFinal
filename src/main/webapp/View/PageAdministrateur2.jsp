@@ -52,7 +52,7 @@
                                     [' ', result.records[0].achat, result.records[1].achat, result.records[2].achat,result.records[3].achat,result.records[4].achat,result.records[5].achat,result.records[6].achat,result.records[7].achat,result.records[8].achat,result.records[9].achat]
                                    
                                 ]);
-                                console.log(result.records[0].discountCode);
+                                
                                 console.log(result.records.length);
                                 var options = {
                                     chart: {
