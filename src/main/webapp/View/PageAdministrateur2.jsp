@@ -76,15 +76,12 @@
     </head>
     <body>
 
-        <!-- On montre le formulaire de saisie -->
+        <!-- bouton -->
         <button class="Retour" onclick=" window.location = '../PageChoixGraphique.jsp'">Retour à la page d'acceuil adminsitrateur</button>
         <h1>Graphique des CA par zone geographique</h1>
-
-         <!-- La zone où les résultats vont s'afficher -->
-        <div id="codes"></div>
-
-        <!-- Le template qui sert à formatter la liste des codes -->
-        
+     
+        <div id="codes"></div> 
+        <!--pour les dates-->
         <form id="dateForm" onsubmit="event.preventDefault();">
         <fieldset><legend>Saisisez vos dates</legend>
         Date de début d'étude : <input id="dateD" name="dateD" type="date" required><br/>

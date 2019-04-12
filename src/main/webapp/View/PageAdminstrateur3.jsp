@@ -74,13 +74,13 @@
     </head>
     <body>
 
-        <!-- On montre le formulaire de saisie -->
+        <!-- Bouton -->
         <button class="Retour" onclick=" window.location = '../PageChoixGraphique.jsp'">Retour à la page d'acceuil adminsitrateur</button>
         <h1>Graphique des CA par client</h1>
 
-         <!-- La zone où les résultats vont s'afficher -->
+         
         <div id="codes"></div>
-        
+        <!-- Les dates -->
         <form id="dateForm" onsubmit="event.preventDefault();">
         <fieldset><legend>Saisisez vos dates</legend>
         Date de début d'étude : <input id="dateD" name="dateD" type="date" required><br/>
