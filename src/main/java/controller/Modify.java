@@ -47,7 +47,7 @@ public class Modify extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
             
-            DAO dao = new DAO(DataSourceFactory.getDataSource());
+             DAO dao = new DAO(DataSourceFactory.getDataSource());
             String id = request.getParameter("id");
             
             request.setAttribute( "id", id );

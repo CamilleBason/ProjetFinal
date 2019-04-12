@@ -20,47 +20,114 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="./css/modifierCommande.css">
 
-        <!--<script>
-            function modeModifier(ligneSelectionne) {
+        <script>
+            $(document).ready(// Exécuté à la fin du chargement de la page
+                    function () {
+                        fillIDSelector();
+                        fillTransportSelector();
+                    }
+            );
 
-                var numCo = document.getElementById("code");
-                numCo.value = ligneSelectionne[0];
-                numCo.setAttribute("readonly", "readonly");
-
-                //var client = document.getElementById("taux");
-                //client.value = ligneSelectionne[1];
-                var produitId = document.getElementById("prodid");
-                produitId.value = ligneSelectionne[2];
-                var quantite = document.getElementById("quantite");
-                quantite.value = ligneSelectionne[3];
-                var fraisP = document.getElementById("fraisP");
-                fraisP.value = ligneSelectionne[4];
-                var dateV = document.getElementById("dateV");
-                dateV.value = ligneSelectionne[5];
-                var dateE = document.getElementById("dateE");
-                dateE.value = ligneSelectionne[6];
-                var transport = document.getElementById("transport");
-                transport.value = ligneSelectionne[7];
-
-                numCo.focus();
+// Ajouter un code
+            function modifier() {
+                $.ajax({
+                    url: "addCode",
+                    // serialize() renvoie tous les paramètres saisis dans le formulaire
+                    data: $("#codeForm").serialize(),
+                    dataType: "json",
+                    success: // La fonction qui traite les résultats
+                            function (result) {
+                                //showCodes();
+                                console.log(result);
+                            },
+                    error: showError
+                });
+                return false;
             }
-        </script>-->
+            function fillIDSelector() {
+                // On fait un appel AJAX pour chercher les états existants
+                $.ajax({
+                    url: "AddIdProducts",
+                    dataType: "json",
+                    error: showError,
+                    success: // La fonction qui traite les résultats
+                            function (result) {
+                                // Le code source du template est dans la page
+                                var template = $('#selectTemplate').html();
+                                // On combine le template avec le résultat de la requête
+                                var processedTemplate = Mustache.to_html(template, result);
+                                // On affiche la liste des options dans le select
+                                $('#ID').html(processedTemplate);
+                            }
+                });
+            }
+
+            function fillTransportSelector() {
+                // On fait un appel AJAX pour chercher les états existants
+                $.ajax({
+                    url: "AddNameManufacturer",
+                    dataType: "json",
+                    error: showError,
+                    success: // La fonction qui traite les résultats
+                            function (result) {
+                                // Le code source du template est dans la page
+                                var template = $('#selectTemplate2').html();
+                                // On combine le template avec le résultat de la requête
+                                var processedTemplate = Mustache.to_html(template, result);
+                                // On affiche la liste des options dans le select
+                                $('#Transport').html(processedTemplate);
+                            }
+                });
+            }
+
+
+// Fonction qui traite les erreurs de la requête
+            function showError(xhr, status, message) {
+                alert("Erreur: " + status + " : " + message);
+            }
+        </script>
 
     </head>
     <body>
+
+        <button class="retour" onclick="window.location = 'Commandes.jsp'">Voir mes commandes </button>
         <h1>modifier votre commande :</h1>
 
         <form id="codeForm" onsubmit="event.preventDefault();">
             <fieldset><legend>Saisie d'un bon de commande</legend>
                 Numéro du bon de commande : <input id="code" name="id" value="<%=request.getAttribute("id")%>" type="text" required><br/>
                 Client ID : <input id="taux" name="taux" value="${userID}" readonly="readonly" required><br/>
-                ID du Produit : <select id="prodid" name="prodid" size="1" required>
-                    <option>---</option></select><br/>
-                Quantité : <input id="quantite" name="quantite" type="number" required><br/>
-                Frais de port : <input id="fraisP" name="fraisP" type="number" required><br/>
+                <script id="selectTemplate" type="text/template">
+                    {{! Pour chaque état dans le tableau}}
+                    {{#records}}
+                    {{! Une option dans le select }}
+                    {{! le point représente la valeur courante du tableau }}
+                    <OPTION VALUE="{{.}}">{{.}}</OPTION>
+                    {{/records}}
+                </script>
+                <form>
+                    <label for="ID">ID du Produit :</label>
+                    <select id="ID" name="ID"></select>
+                </form>
+
+                Quantité : <input id="quantite" name="quantite" type="number"  min="0" required><br/>
+                Frais de port : <input id="fraisP" name="fraisP" type="number" min="0" required><br/>
                 Date de vente : <input id="dateV" name="dateVente" type="date" required><br/>
                 Date d'expédition : <input id="dateE" name="dateExp" type="date" required><br/>
-                Société de transport : <input id="transport" name="transport" type="text" size="40" required><br/>
+
+                <script id="selectTemplate2" type="text/template">
+                    {{! Pour chaque état dans le tableau}}
+                    {{#records}}
+                    {{! Une option dans le select }}
+                    {{! le point représente la valeur courante du tableau }}
+                    <OPTION VALUE="{{.}}">{{.}}</OPTION>
+                    {{/records}}
+                </script>
+                <form>
+                    <label for="Transport">Société de transport :</label>
+                    <select id="Transport" name="Transport"></select>
+                </form>
+                <input type="submit" id="Modifier" value="Modifier" onclick="modifier()">
             </fieldset>
         </form>
 
