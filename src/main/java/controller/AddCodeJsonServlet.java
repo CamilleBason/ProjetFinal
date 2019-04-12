@@ -54,9 +54,10 @@ public class AddCodeJsonServlet extends HttpServlet {
                 java.sql.Date dateExpSQL = new java.sql.Date(dateE.getTime());
 
 		try {
-                        
+                        //on appelle la fonction du dao 
 			dao.addDiscountCode(Integer.valueOf(numC), Integer.valueOf(client), Integer.valueOf(prodid), Integer.valueOf(quantite), Float.valueOf(fraisPort), dateVenteSQL, dateExpSQL, transport);
-			message = String.format("Bon de commande n° %s ajouté", numC);
+			//on affiche un message pour confirmer l'ajout
+                        message = String.format("Bon de commande n° %s ajouté", numC);
 		} catch (NumberFormatException | SQLException ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			message = ex.getMessage();

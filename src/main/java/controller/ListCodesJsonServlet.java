@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author cbason
+ * permet d'afficher les commandes  
  */
 @WebServlet(name = "codesInJSON", urlPatterns = {"/allCodes"})
 public class ListCodesJsonServlet extends HttpServlet {
@@ -36,7 +37,7 @@ public class ListCodesJsonServlet extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-String numC = request.getParameter("code");
+            String numC = request.getParameter("code");
             String IDclient = request.getParameter("taux");
             String prodid = request.getParameter("prodid");
             String quantite = request.getParameter("quantite");

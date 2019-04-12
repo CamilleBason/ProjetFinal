@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author edeux
+ * @author achelle
  */
 @WebServlet(name = "AddNameManufacturer", urlPatterns = {"/AddNameManufacturer"})
 public class AddNameManufacturer extends HttpServlet {

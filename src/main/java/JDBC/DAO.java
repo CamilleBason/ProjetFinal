@@ -52,6 +52,7 @@ public class DAO {
         }
         return login;
     }
+    //Recupérer les ID DES PRODUITS POUR LES AFFICHER DANS LE FORM D'AJOUT DE COMMANDE
     public List<Integer> idProducts(){
         List<Integer> result = new ArrayList<>();
 		String sql = "SELECT DISTINCT PRODUCT_ID FROM PRODUCT";
@@ -77,8 +78,8 @@ public class DAO {
      * @param customerID la clé du CUSTOMER à rechercher
      * @return l'enregistrement correspondant dans la table CUSTOMER, ou null si
      * pas trouvé
-     * @throws DAOException
-     */
+     * @throws DAOException*/
+     
     public CustomerEntity findCustomer(int customerID) throws DAOException {
         CustomerEntity result = null;
 
@@ -106,7 +107,7 @@ public class DAO {
 
 
 	
-
+//Permet de trouver les commandes à partir de l'id du client
     public List<PurchaseOrder> findPurchaseOrder(int customerID) throws DAOException, SQLException {
         //PurchaseOrder result = null;
         List<PurchaseOrder> result = new LinkedList<>();
@@ -142,6 +143,7 @@ public class DAO {
         return result;
     }
 
+    //On récupère toute les commandes 
     public List<PurchaseOrder> allCodes() throws SQLException {
 
         List<PurchaseOrder> result = new LinkedList<>();
@@ -230,7 +232,7 @@ String sql = "SELECT CUSTOMER.NAME AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PU
         return result;
     }
 
-
+// permet d'ajouter une commande 
     public int addDiscountCode(int numC, int IDclient, int selectTemplate, int quantite, float fraisPort, Date dateVente, Date dateExp, String selectTemplate2) throws SQLException {
         int result = 0;
 
@@ -309,6 +311,7 @@ String sql = "SELECT CUSTOMER.NAME AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PU
 		}
 		return result;
 	}
+     
          public List<String> nameCompany(){
         List<String> result = new ArrayList<>();
 		String sql = "SELECT DISTINCT FREIGHT_COMPANY FROM PURCHASE_ORDER";

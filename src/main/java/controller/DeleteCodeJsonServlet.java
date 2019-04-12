@@ -20,6 +20,7 @@ import JDBC.DataSourceFactory;
 /**
  *
  * @author cbason
+ * permet de supprimer des commandes 
  */
 @WebServlet(name = "deleteDiscountCode", urlPatterns = {"/deleteCode"})
 public class DeleteCodeJsonServlet extends HttpServlet {
