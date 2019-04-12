@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author crouvera
  */
 @WebServlet(name = "ListDiscountCodesServlet", urlPatterns = {"/allDiscountCodes"})
-public class ListDiscountCodesServlet extends HttpServlet {
+public class ListCategorieServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
