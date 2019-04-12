@@ -25,13 +25,17 @@
                     function () {
                         fillIDSelector();
                         fillTransportSelector();
+                        //document.getElementById('code').html(window.location.hash.substring(1));
+                        //console.log(window.location.hash.substring(1));
+                        var numCo = window.location.hash.substring(1);
+                       document.getElementById("code").value = numCo;
                     }
             );
 
 // Ajouter un code
             function modifier() {
                 $.ajax({
-                    url: "/Modify",
+                    url: "Modify",
                     // serialize() renvoie tous les paramètres saisis dans le formulaire
                     data: $("#codeForm").serialize(),
                     dataType: "json",
@@ -92,11 +96,13 @@
 
         <button class="retour" onclick="window.location = 'Commandes.jsp'">Voir mes commandes </button>
         <h1>modifier votre commande :</h1>
+        
+         <div id="messageModifier" style="color:red"></div>
 
-        <form id="codeForm" onsubmit="event.preventDefault();">
+        <form id="codeForm">
             <fieldset><legend>Saisie d'un bon de commande</legend>
-                Numéro du bon de commande : <input id="code" name="id" value="<%=request.getAttribute("id")%>" type="text" required><br/>
-                Client ID : <input id="taux" name="taux" value="${userID}" readonly="readonly" required><br/>
+                Numéro du bon de commande : <input id="code" name="code" readonly="readonly" type="text" required><br/>
+                Client ID : <input id="clientID" name="clientID" value="${userID}" readonly="readonly" required><br/>
                 <script id="selectTemplate" type="text/template">
                     {{! Pour chaque état dans le tableau}}
                     {{#records}}
