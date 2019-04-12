@@ -41,7 +41,7 @@ public class GraphiqueClient extends HttpServlet {
 
 		Properties resultat = new Properties();
 		try {
-			resultat.put("records", dao.GraphClient());
+			resultat.put("records", dao.GraphiqueClient());
                         //resultat.put("records", dao.allCodes());
 		}
                 catch (SQLException ex) {
