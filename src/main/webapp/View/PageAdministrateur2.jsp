@@ -32,6 +32,7 @@
 
             function drawChart(result) {
                 $.ajax({
+                    //on indique l'url pour observer les données que nous avons demandés 
                     url: "http://localhost:8080/ProjetFinal/ZoneGeographique",
                     dataType: "json",
                     error: showError,
@@ -44,9 +45,9 @@
                                 // On affiche la liste des options dans le select
                                 $('#codes').html(processedTemplate);
 
-                             
+                              //J'ai utilisé la google Chart
                                 var data = google.visualization.arrayToDataTable([
-                                
+                                //Les colones
                                     ['CA', result.records[0].ville, result.records[1].ville, result.records[2].ville,result.records[3].ville,result.records[4].ville,result.records[5].ville,result.records[6].ville,result.records[7].ville,result.records[8].ville,result.records[9].ville],
                                     [' ', result.records[0].achat, result.records[1].achat, result.records[2].achat,result.records[3].achat,result.records[4].achat,result.records[5].achat,result.records[6].achat,result.records[7].achat,result.records[8].achat,result.records[9].achat]
                                    
@@ -55,8 +56,8 @@
                                 console.log(result.records.length);
                                 var options = {
                                     chart: {
-                                        title: 'Company Performance',
-                                        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                                        title: 'Graphique CA',
+                                        subtitle: 'CA par zone geographique',
                                     }
                                 };
                                 console.log(result);

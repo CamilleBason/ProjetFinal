@@ -28,9 +28,9 @@
             }
 
 
-
             function drawChart(result) {
                 $.ajax({
+                    //on indique l'url pour observer les données que nous avons demandés 
                     url: "http://localhost:8080/ProjetFinal/GraphiqueClient",
                     dataType: "json",
                     error: showError,
@@ -43,9 +43,9 @@
                                 // On affiche la liste des options dans le select
                                 $('#codes').html(processedTemplate);
 
-
+                                 //J'ai utilisé la google Chart
                                 var data = google.visualization.arrayToDataTable([
-
+                                    //les colonnes
                                     ['CA', result.records[0].client, result.records[1].client, result.records[2].client, result.records[3].client,result.records[4].client,result.records[5].client,result.records[6].client,result.records[7].client,result.records[8].client,result.records[9].client,result.records[10].client,result.records[11].client],
                                     [' ', result.records[0].prix, result.records[1].prix, result.records[2].prix, result.records[3].prix,result.records[4].client,result.records[5].client,result.records[6].client,result.records[7].client,result.records[8].client,result.records[9].client,result.records[10].client,result.records[11].client]
                                        
@@ -54,8 +54,8 @@
                                 console.log(result.records.length);
                                 var options = {
                                     chart: {
-                                        title: 'Company Performance',
-                                        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+                                        title: 'Graphique CA',
+                                        subtitle: 'CA par client',
                                     }
                                 };
                                 console.log(result);
