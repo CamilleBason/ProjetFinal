@@ -36,7 +36,7 @@ public class ListCategorieServlet extends HttpServlet {
 		Properties resultat = new Properties();
 		try {
                     //fonction allDiscountCodes du DAO pour CA par categorie 
-			resultat.put("records", dao.allDiscountCodes());
+			resultat.put("records", dao.CategorieCA());
                         //resultat.put("records", dao.allCodes());
 		} catch (SQLException ex) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
