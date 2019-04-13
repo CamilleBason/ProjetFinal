@@ -4,10 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Projet Connexion</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Projet Connexion</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body{
+            display: flex; /* contexte sur le parent */
+            flex-direction: column; /* direction d'affichage verticale */
+            justify-content: center; /* alignement vertical */
+            min-height: 100vh;
+        }
+
+        .login{
+            max-width: 400px;
+            box-shadow: 0 0 5px 2px var(--primary);
+        }
+    </style>
+
 </head>
 <body>
     <div class='container login p-3 rounded'>
@@ -17,9 +30,14 @@
         La JSP récupère cette valeur dans ${errorMessage}
         --%>
 
-        <div id="error" style="color:red">${errorMessage}</div>
+        <%
+            String error = (String) request.getAttribute("errorMessage");
+            if (error != null) {
+        %>
+                <div id="error" class="bg-danger text-light p-2 rounded"><%= error %></div>
+        <% } %>
 
-        <form action="<c:url value="/" />" method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
+            <form action="<c:url value="/" />" method="POST"> <!-- l'action par défaut est l'URL courant, qui va rappeler la servlet -->
                 <div class='form-group'>
                     <p class='form-text'>login :</p> 
                     <input class='form-control' name='loginParam' type ='text' placeholder="e-mail@exemple.com">

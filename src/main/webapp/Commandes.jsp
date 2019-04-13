@@ -18,7 +18,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/commandes.css">
         <script>
             $(document).ready(// Exécuté à la fin du chargement de la page
                     function () {
@@ -69,23 +68,26 @@
                                 }
 
                             }
+
+
+
                 });
 
             }
 
 // fonction qui récupère le numéro de la commande pour pouvoir la modifier
-            function modifierCommande(element){
+            function modifierCommande(element) {
                 //selection de la ligne du tableau
                 var rowSelected = element.parentNode.parentNode.rowIndex;
                 console.log("row : " + element.parentNode.parentNode.rowIndex);
-               //selection de la cellule voulus
-                for(var i=0;i<1;i++) {
+                //selection de la cellule voulus
+                for (var i = 0; i < 1; i++) {
                     var res = document.getElementById("tableau").rows[rowSelected].cells[i].innerHTML;
                     console.log("res : " + res);
                 }
                 //envoie du numéro de la commande dans l'url de la page de modification
-                window.location='modifierCommande.jsp'+'#' +res;
-                
+                window.location = 'modifierCommande.jsp' + '#' + res;
+
             }
 
             // Supprimer un code
@@ -111,9 +113,18 @@
                 alert(JSON.parse(xhr.responseText).message);
             }
 
-        </script>    </head>
+        </script>
+    </head>
     <body>
-        <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+
+            <div class="ml-auto mr-3 my-2">
+                <form action="<c:url value="/"/>" method="POST">
+                    <button type="submit" class="btn btn-secondary" name="action" value="Deconnexion">Se déconnecter</button>
+                </form>
+            </div>
+        </nav>
+        <div class="container" style="padding-top: 70px;">
             <!-- Afficher le nom de l'utlisateur -->
             <h1 class="text-primary">Bienvenue <span id="userName">${userName}</span></h1>
 
@@ -144,18 +155,17 @@
                 {{#records}}
                 {{! Une ligne dans la table }}
                 <tbody>
-                <TR>
-                <TD>{{orderNum}}</TD>
-                <TD>{{customerId}}</TD>
-                <TD>{{productID}}</TD>
-                <TD>{{quantity}}</TD>
-                <TD>{{shippingCost}}</TD>
-                <TD>{{salesDate}}</TD>
-                <TD>{{shippingDate}}</TD>
-                <TD><button class="btn btn-danger" onclick="deleteCode('{{orderNum}}')">Supprimer</button></TD>
-                <TD><button class="btn btn-info" onclick="modifierCommande(this)">Modifier</button>
-                </TD>
-                </TR>
+                <tr>
+                <td>{{orderNum}}</td>
+                <td>{{customerId}}</td>
+                <td>{{productID}}</td>
+                <td>{{quantity}}</td>
+                <td>{{shippingCost}}</td>
+                <td>{{salesDate}}</td>
+                <td>{{shippingDate}}</td>
+                <td><button class="btn btn-danger" onclick="deleteCode('{{orderNum}}')">Supprimer</button></td>
+                <td><button class="btn btn-primary" onclick="modifierCommande(this)">Modifier</button></td>
+                </tr>
                 </tbody>
                 {{/records}}
 
@@ -163,14 +173,9 @@
                 <p>
 
                 </p>
-                <button class="btn btn-primary" onclick="window.location='AjoutCommande.jsp'">Ajouter une commande</button>
             </script>
 
-            <!-- Bouton de déconnexion -->
-            <form action="<c:url value="/"/>" method="POST"> 
-                <input class="btn btn-secondary" type='submit' name='action' value='Deconnexion'>
-            </form>
+            <button class="btn btn-primary" onclick="window.location = 'AjoutCommande.jsp'">Ajouter une commande</button>
         </div>
-
     </body>
 </html>
