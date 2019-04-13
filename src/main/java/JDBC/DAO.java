@@ -32,33 +32,32 @@ public class DAO {
         this.myDataSource = dataSource;
     }
 
-    public List<Integer> idProducts(){
+    public List<Integer> idProducts() {
         List<Integer> result = new ArrayList<>();
-		String sql = "SELECT DISTINCT PRODUCT_ID FROM PRODUCT";
-		try ( Connection connection = myDataSource.getConnection(); 
-		      Statement stmt = connection.createStatement(); 
-		      ResultSet rs = stmt.executeQuery(sql)) {
-			while (rs.next()) {
-				// On récupère les champs nécessaires de l'enregistrement courant
-				Integer id = rs.getInt("PRODUCT_ID");
-				// On l'ajoute à la liste des résultats
-				result.add(id);
-			}
-		} catch (SQLException ex) {
+        String sql = "SELECT DISTINCT PRODUCT_ID FROM PRODUCT";
+        try (Connection connection = myDataSource.getConnection();
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                // On récupère les champs nécessaires de l'enregistrement courant
+                Integer id = rs.getInt("PRODUCT_ID");
+                // On l'ajoute à la liste des résultats
+                result.add(id);
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-		return result;
+        return result;
     }
 
-    
     /**
      * Trouver un Customer à partir de sa clé
      *
      * @param customerID la clé du CUSTOMER à rechercher
      * @return l'enregistrement correspondant dans la table CUSTOMER, ou null si
      * pas trouvé
-     * @throws DAOException*/
-     
+     * @throws DAOException
+     */
     public CustomerEntity findCustomer(int customerID) throws DAOException {
         CustomerEntity result = null;
 
@@ -84,8 +83,6 @@ public class DAO {
         return result;
     }
 
-
-	
 //Permet de trouver les commandes à partir de l'id du client
     public List<PurchaseOrder> findPurchaseOrder(int customerID) throws DAOException, SQLException {
         //PurchaseOrder result = null;
@@ -147,57 +144,60 @@ public class DAO {
         }
         return result;
     }
+
     //Fonction pour afficher le premier graphique
     public List<Categorie> CategorieCA() throws SQLException {
 
-		List<Categorie> result = new LinkedList<>();
-                //la requête sql j'ai demandé le CA groupé par categorie 
-		String sql ="SELECT PRODUCT_CODE.DESCRIPTION AS SA, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS CA FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID)INNER JOIN PRODUCT_CODE ON PRODUCT.PRODUCT_CODE=PRODUCT_CODE.PROD_CODE GROUP BY PRODUCT_CODE.DESCRIPTION";
-
-		try (Connection connection = myDataSource.getConnection(); 
-		     PreparedStatement stmt = connection.prepareStatement(sql)) {
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				String sommequantite = rs.getString("SA");
-                               float produit = rs.getFloat("CA");
-				Categorie c = new Categorie(sommequantite, produit);
-				result.add(c);
-			}
-		}
-		return result;
-	}
-    //Fonction pour le deuxième Graphique 
-      public List<ZoneGeo> ZoneGeographique() throws SQLException {
-
-		List<ZoneGeo> result = new LinkedList<>();
-                //requete sql : j'ai demandé le CA groupé par ville 
-		String sql ="SELECT CUSTOMER.CITY AS H, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) INNER JOIN CUSTOMER USING(CUSTOMER_ID) GROUP BY CUSTOMER.CITY" ;
-
-		try (Connection connection = myDataSource.getConnection(); 
-		     PreparedStatement stmt = connection.prepareStatement(sql)) {
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				String customer = rs.getString("H");
-                              float achat = rs.getFloat("J");
-				ZoneGeo c1 = new ZoneGeo(customer, achat);
-				result.add(c1);
-			}
-		}
-		return result;
-	}
-      //Pour afficher le troisième graphique 
-     public List<Client> GraphiqueClient() throws SQLException {
-
-        List<Client> result = new LinkedList<>();
-
-//requete sql : j'ai deméndé le CA groupé par client 
-String sql = "SELECT CUSTOMER.NAME AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J1 FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) INNER JOIN CUSTOMER USING(CUSTOMER_ID) GROUP BY CUSTOMER.NAME";        
+        List<Categorie> result = new LinkedList<>();
+        //la requête sql j'ai demandé le CA groupé par categorie 
+        String sql = "SELECT PRODUCT_CODE.DESCRIPTION AS SA, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS CA FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID)INNER JOIN PRODUCT_CODE ON PRODUCT.PRODUCT_CODE=PRODUCT_CODE.PROD_CODE GROUP BY PRODUCT_CODE.DESCRIPTION";
 
         try (Connection connection = myDataSource.getConnection();
                 PreparedStatement stmt = connection.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                String client = rs.getString("H1");            
+                String sommequantite = rs.getString("SA");
+                float produit = rs.getFloat("CA");
+                Categorie c = new Categorie(sommequantite, produit);
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
+    //Fonction pour le deuxième Graphique 
+    public List<ZoneGeo> ZoneGeographique() throws SQLException {
+
+        List<ZoneGeo> result = new LinkedList<>();
+        //requete sql : j'ai demandé le CA groupé par ville 
+        String sql = "SELECT CUSTOMER.CITY AS H, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) INNER JOIN CUSTOMER USING(CUSTOMER_ID) GROUP BY CUSTOMER.CITY";
+
+        try (Connection connection = myDataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String customer = rs.getString("H");
+                float achat = rs.getFloat("J");
+                ZoneGeo c1 = new ZoneGeo(customer, achat);
+                result.add(c1);
+            }
+        }
+        return result;
+    }
+    //Pour afficher le troisième graphique 
+
+    public List<Client> GraphiqueClient() throws SQLException {
+
+        List<Client> result = new LinkedList<>();
+
+//requete sql : j'ai deméndé le CA groupé par client 
+        String sql = "SELECT CUSTOMER.NAME AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PURCHASE_COST) AS J1 FROM PRODUCT INNER JOIN PURCHASE_ORDER USING(PRODUCT_ID) INNER JOIN CUSTOMER USING(CUSTOMER_ID) GROUP BY CUSTOMER.NAME";
+
+        try (Connection connection = myDataSource.getConnection();
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String client = rs.getString("H1");
                 float prix = rs.getFloat("J1");
                 Client c2 = new Client(client, prix);
                 result.add(c2);
@@ -227,12 +227,12 @@ String sql = "SELECT CUSTOMER.NAME AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PU
     }
 
     /**
-     * Supprime un enregistrement dans la table DISCOUNT_CODE
+     * Supprime un enregistrement dans la table PURCHASE_ORDER
      *
      * @param code la clé de l'enregistrement à supprimer
      * @return le nombre d'enregistrements supprimés (1 ou 0)
      * @throws java.sql.SQLException renvoyées par JDBC
-	 *
+     *
      */
     public int deleteDiscountCode(int code) throws SQLException {
         int result = 0;
@@ -245,6 +245,19 @@ String sql = "SELECT CUSTOMER.NAME AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PU
         return result;
     }
 
+    /**
+     *
+     * @param numC
+     * @param IDclient
+     * @param prodid
+     * @param quantite
+     * @param fraisPort
+     * @param dateVente
+     * @param dateExp
+     * @param transport
+     * @return
+     * @throws SQLException
+     */
     public int modifPurchaseOrder(int numC, int IDclient, int prodid, int quantite, float fraisPort, Date dateVente, Date dateExp, String transport) throws SQLException {
         int result = 0;
         String sql = "UPDATE PURCHASE_ORDER SET PRODUCT_ID=? , QUANTITY=?, SHIPPING_COST=?, SALES_DATE=?, SHIPPING_DATE=?, FREIGHT_COMPANY=? WHERE CUSTOMER_ID=" + IDclient + "AND ORDER_NUM=" + numC;
@@ -261,47 +274,27 @@ String sql = "SELECT CUSTOMER.NAME AS H1, SUM(PURCHASE_ORDER.QUANTITY*PRODUCT.PU
         }
         return result;
     }
-     public List<Product> allProducts() throws SQLException {
 
-		List<Product> result = new LinkedList<>();
-
-		String sql = "SELECT * FROM PRODUCT ORDER BY PRODUCT_ID";
-		try (Connection connection = myDataSource.getConnection(); 
-		     PreparedStatement stmt = connection.prepareStatement(sql)) {
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {                                
-                                int prodid = rs.getInt("PRODUCT_ID");
-                                int manufac_id = rs.getInt("MANUFACTURER_ID");
-                                String code = rs.getString("PRODUCT_CODE");
-                                float cout_achat = rs.getFloat("PURCHASE_COST");
-                                int quantite_dispo = rs.getInt("QUANTITY_ON_HAND");
-                                float majoration = rs.getFloat("MARKUP");
-                                boolean dispo = rs.getBoolean("AVAILABLE");
-                                String descrip = rs.getString("DESCRIPTION");
-                                // On crée l'objet "product"
-                                Product p = new Product(prodid, manufac_id, code, cout_achat, quantite_dispo, majoration, dispo, descrip);
-                                result.add(p);
-			}
-		}
-		return result;
-	}
-     
-         public List<String> nameCompany(){
+     /**
+     *
+     * @return
+     */
+    public List<String> nameCompany() {
         List<String> result = new ArrayList<>();
-		String sql = "SELECT DISTINCT FREIGHT_COMPANY FROM PURCHASE_ORDER";
-		try ( Connection connection = myDataSource.getConnection(); 
-		      Statement stmt = connection.createStatement(); 
-		      ResultSet rs = stmt.executeQuery(sql)) {
-			while (rs.next()) {
-				// On récupère les champs nécessaires de l'enregistrement courant
-				String name = rs.getString("FREIGHT_COMPANY");
-				// On l'ajoute à la liste des résultats
-				result.add(name);
-			}
-		} catch (SQLException ex) {
+        String sql = "SELECT DISTINCT FREIGHT_COMPANY FROM PURCHASE_ORDER";
+        try (Connection connection = myDataSource.getConnection();
+                Statement stmt = connection.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                // On récupère les champs nécessaires de l'enregistrement courant
+                String name = rs.getString("FREIGHT_COMPANY");
+                // On l'ajoute à la liste des résultats
+                result.add(name);
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-		return result;
+        return result;
     }
 
 }
