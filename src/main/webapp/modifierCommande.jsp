@@ -22,33 +22,35 @@
         <script>
             $(document).ready(// Exécuté à la fin du chargement de la page
                     function () {
+                        //met les ID des produits et les entreprises de transport dans le menu déroullant
                         fillIDSelector();
                         fillTransportSelector();
-                        //document.getElementById('code').html(window.location.hash.substring(1));
-                        //console.log(window.location.hash.substring(1));
+                        //recuperation de la valeur du nulméro de commande de l'url
                         var numCo = window.location.hash.substring(1);
+                        //assignation du numéro de la commande à l'element code
                        document.getElementById("code").value = numCo;
                     }
             );
 
-// Ajouter un code
+// Modification d'une commande
             function modifier() {
                 $.ajax({
-                    url: "Modify",
+                    url: "/Modify",//on charge la servlet Modify
                     // serialize() renvoie tous les paramètres saisis dans le formulaire
                     data: $("#codeForm").serialize(),
                     dataType: "json",
                     success: // La fonction qui traite les résultats
                             function (result) {
-                                //showCodes();
                                 console.log(result);
+                                var mes = document.getElementById("messageModifier");
+                                mes.innerHTML = result.message;
                             },
                     error: showError
                 });
                 return false;
             }
             function fillIDSelector() {
-                // On fait un appel AJAX pour chercher les états existants
+                // On fait un appel AJAX pour chercher les prouits existants
                 $.ajax({
                     url: "AddIdProducts",
                     dataType: "json",
@@ -66,7 +68,7 @@
             }
 
             function fillTransportSelector() {
-                // On fait un appel AJAX pour chercher les états existants
+                // On fait un appel AJAX pour chercher les transporteurs existants
                 $.ajax({
                     url: "AddNameManufacturer",
                     dataType: "json",
@@ -138,7 +140,7 @@
 
 
         <form action="<c:url value="/"/>" method="POST">
-            <input class='deconnexion' type='submit' name='boutonConnexion' value='Se deconnecter'>
+            <input class='deconnexion' type='submit' name='boutonConnexion' value='Deconnexion'>
         </form>
     </body>
 </html>

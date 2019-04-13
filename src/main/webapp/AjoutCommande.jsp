@@ -25,14 +25,14 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="./css/ajoutCommande.css"> 
         <script>
-            $(document).ready(// Exécuté à la fin du chargement de la page, met les ID et les entreprises de transport dans le menu déroullant
+            $(document).ready(// Exécuté à la fin du chargement de la page, met les ID des produits et les entreprises de transport dans le menu déroullant
                     function () {
                         fillIDSelector();
                         fillTransportSelector();
                     }
             );
 
-// Ajouter un code
+// Ajouter une commande
             function addCode() {
                 $.ajax({
                     //on charge la servlet AddCodeJsonServlet
@@ -51,6 +51,8 @@
                 });
                 return false;
             }
+            
+            //ajouter les id des produits
             function fillIDSelector() {
                 // On fait un appel AJAX pour chercher les états existants
                 $.ajax({
@@ -69,6 +71,7 @@
                 });
             }
 
+            //ajouter les sociétés de transport
             function fillTransportSelector() {
                 // On fait un appel AJAX pour chercher les états existants
                 $.ajax({

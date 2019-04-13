@@ -32,6 +32,10 @@ public class DAO {
         this.myDataSource = dataSource;
     }
 
+    /**
+     *récuperation des id des produits pour les afficher dans ajouterCommande et modifierCommande
+     * @return List des id des produits
+     */
     public List<Integer> idProducts() {
         List<Integer> result = new ArrayList<>();
         String sql = "SELECT DISTINCT PRODUCT_ID FROM PRODUCT";
@@ -185,7 +189,6 @@ public class DAO {
         return result;
     }
     //Pour afficher le troisième graphique 
-
     public List<Client> GraphiqueClient() throws SQLException {
 
         List<Client> result = new LinkedList<>();
@@ -246,7 +249,9 @@ public class DAO {
     }
 
     /**
-     *
+     *Mise à jour de la table PURCHASE_ORDER 
+     *modification des commandes
+     * 
      * @param numC
      * @param IDclient
      * @param prodid
@@ -276,8 +281,8 @@ public class DAO {
     }
 
      /**
-     *
-     * @return
+     *récuperation des noms des sociétés de transport pour les afficher dans ajouterCommande et modifierCommande
+     * @return List des sociétés de transport
      */
     public List<String> nameCompany() {
         List<String> result = new ArrayList<>();

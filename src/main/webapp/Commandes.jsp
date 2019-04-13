@@ -27,6 +27,7 @@
                     }
             );
 
+// fonction d'affichage du tableau de commandes
             function showCodes() {
                 // On fait un appel AJAX pour chercher les codes
                 $.ajax({
@@ -71,19 +72,18 @@
                 });
 
             }
-            
+
+// fonction qui récupère le numéro de la commande pour pouvoir la modifier
             function modifierCommande(element){
+                //selection de la ligne du tableau
                 var rowSelected = element.parentNode.parentNode.rowIndex;
                 console.log("row : " + element.parentNode.parentNode.rowIndex);
-                //console.log("cells : " + document.getElementsByTagName('td').values(0));
+               //selection de la cellule voulus
                 for(var i=0;i<1;i++) {
                     var res = document.getElementById("tableau").rows[rowSelected].cells[i].innerHTML;
                     console.log("res : " + res);
                 }
-                
-                //var template = $('#codesTemplate').html();
-                
-                //console.log(this);
+                //envoie du numéro de la commande dans l'url de la page de modification
                 window.location='modifierCommande.jsp'+'#' +res;
                 
             }
@@ -166,15 +166,6 @@
                 <button class="btn btn-primary" onclick="window.location='AjoutCommande.jsp'">Ajouter une commande</button>
             </script>
 
-            <!--  <script id="selectTemplate" type="text/template">
-                  {{! Pour chaque état dans le tableau}}
-                  {{#records}}
-                  {{! Une option dans le select }}
-                  {{! le point représente la valeur courante du tableau }}
-                  <OPTION VALUE="{{.}}">{{.}}</OPTION>
-                  {{/records}}
-              </script> 
-            -->
             <!-- Bouton de déconnexion -->
             <form action="<c:url value="/"/>" method="POST"> 
                 <input class="btn btn-secondary" type='submit' name='action' value='Deconnexion'>
