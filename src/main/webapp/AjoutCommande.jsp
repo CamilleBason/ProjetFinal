@@ -43,10 +43,11 @@
                     dataType: "json",
                     success: // La fonction qui traite les résultats
                             function (result) {
-                                
+                                alert("Votre bon de commande a été ajouté");
                                 console.log(result);
                                 var mes = document.getElementById("messageAjout");
                                 mes.innerHTML = result.message;
+                                
                             },
                     error: showError
                 });

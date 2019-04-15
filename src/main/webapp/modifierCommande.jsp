@@ -40,9 +40,11 @@
                     dataType: "json",
                     success: // La fonction qui traite les résultats
                             function (result) {
+                                alert("Votre bon de commande a été modifié");
                                 console.log(result);
                                 var mes = document.getElementById("messageModifier");
                                 mes.innerHTML = result.message;
+                                
                             },
                     error: showError
                 });
